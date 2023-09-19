@@ -6,7 +6,7 @@ export interface MainButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 function MainButton(props: MainButtonProps) {
   return (
-    <div>MainButton</div>
+    <button>MainButton</button>
   )
 }
 

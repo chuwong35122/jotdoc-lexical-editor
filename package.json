@@ -1,7 +1,10 @@
 {
-  "name": "jotdoc-lexical-editor",
+  "name": "@chuwong35122/jotdoc-lexical-editor",
   "version": "0.0.1",
   "description": "A library for editing documents that built on top of Lexical editor.",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/chuwong35122"
+  },
   "scripts": {
     "rollup": "rollup -c"
   },

@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "jotdoc-lexical-editor": "^0.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@chuwong35122/jotdoc-lexical-editor": "0.0.1"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

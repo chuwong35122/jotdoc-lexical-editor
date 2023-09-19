@@ -1,15 +1,17 @@
 {
-  "name": "@chuwong35122/jotdoc-lexical-editor",
-  "version": "0.0.2",
+  "name": "jotdoc-lexical-editor",
+  "version": "0.0.1",
   "description": "A library for editing documents that built on top of Lexical editor.",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/chuwong35122"
-  },
   "scripts": {
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "test": "npm run test"
   },
-  "author": "chuchuwiiii",
-  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.2.1",
@@ -21,10 +23,19 @@
     "tslib": "^2.6.2",
     "typescript": "^5.2.2"
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "files": [
-    "dist"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuwong35122/jotdoc-lexical-editor.git"
+  },
+  "keywords": [
+    "lexical",
+    "jotdoc",
+    "editor"
   ],
-  "types": "dist/index.d.ts"
+  "author": "chuchuwiiii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chuwong35122/jotdoc-lexical-editor/issues"
+  },
+  "homepage": "https://github.com/chuwong35122/jotdoc-lexical-editor#readme"
 }

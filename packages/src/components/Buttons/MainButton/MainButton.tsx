@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react'
+import './index.css'
 
 export interface MainButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
@@ -6,7 +7,7 @@ export interface MainButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 function MainButton(props: MainButtonProps) {
   return (
-    <button>{props.children}</button>
+    <button className='main-button-container' {...props}>{props.children}</button>
   )
 }
 

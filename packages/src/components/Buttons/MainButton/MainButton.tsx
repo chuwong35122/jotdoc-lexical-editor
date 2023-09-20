@@ -19,7 +19,7 @@ function MainButton(props: MainButtonProps) {
   }
 
   return (
-    <button className={[getButtonColor(props.color ?? 'primary'), "main-button-container"].join(' ')} {...props}>
+    <button type='button' className={[getButtonColor(props.color ?? 'primary'), "main-button-container"].join(' ')} {...props}>
       {props.children}
     </button>
   );

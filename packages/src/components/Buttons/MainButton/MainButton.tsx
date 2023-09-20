@@ -1,12 +1,12 @@
 import React, { HTMLAttributes } from 'react'
 
 export interface MainButtonProps extends HTMLAttributes<HTMLButtonElement> {
-
+  children: React.ReactNode
 }
 
 function MainButton(props: MainButtonProps) {
   return (
-    <button>MainButton</button>
+    <button>{props.children}</button>
   )
 }
 

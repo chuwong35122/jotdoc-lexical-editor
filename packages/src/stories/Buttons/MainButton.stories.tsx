@@ -5,15 +5,19 @@ import MainButton from "../../components/Buttons/MainButton/MainButton";
 const meta: Meta<typeof MainButton> = {
   title: "jotdoc-lexical-editor/MainButton",
   component: MainButton,
-}
+};
 
-export default meta
-type Story = StoryObj<typeof MainButton>
+export default meta;
+type Story = StoryObj<typeof MainButton>;
 
 export const Primary: Story = {
-  render: () => <div style={{ display: 'flex', gap: 4 }}>
-    <MainButton color='primary'>Primary</MainButton>
-    <MainButton color='green'>Green</MainButton>
-    <MainButton color='blue'>Blue</MainButton>
-  </div>,
+  render: () => <MainButton color="primary">Primary</MainButton>,
+};
+
+export const Green: Story = {
+  render: () => <MainButton color="green">Green</MainButton>,
+};
+
+export const Blue: Story = {
+  render: () => <MainButton color="blue">Blue</MainButton>,
 }

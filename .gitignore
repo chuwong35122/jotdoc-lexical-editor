@@ -1,0 +1,4 @@
+packages/node_modules/
+packages/dist
+.npmrc
+jotdoc-app/node_modules/

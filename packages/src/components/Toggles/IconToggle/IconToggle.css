@@ -1,0 +1,22 @@
+@import "../../../styles/variables.css";
+
+.toggle-container {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle-container.active--primary {
+  background-color: var(--primary);
+}
+
+.toggle-container.active--green {
+  background-color: var(--green);
+}
+
+.toggle-container.active--blue {
+  background-color: var(--blue);
+}

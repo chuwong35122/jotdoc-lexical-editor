@@ -50,13 +50,35 @@ function BlockContentSelector(props: BlockContentSelectorProps) {
           />
         </button>
       )}
-      {props.isOpen &&
-        SELECT_ICON_OPTIONS.map((option, index) => (
-          <div key={index} className={["select-option"].join(' ')}>
-            <img src={option.icon} width={24} height={24} alt={option.label} />
-            <p>{option.label}</p>
-          </div>
-        ))}
+      {props.isOpen && (
+        <div className="select-option-wrapper">
+          {SELECT_ICON_OPTIONS.map((option, index) => (
+            <button
+              key={index}
+              className={["select-option"].join(" ")}
+              style={{
+                borderBottom:
+                  index === SELECT_ICON_OPTIONS.length - 1
+                    ? "none"
+                    : "1px solid rgba(0,0,0,0.1)",
+                borderRadius:
+                  index === SELECT_ICON_OPTIONS.length - 1
+                    ? "0 0 0.5rem 0.5rem"
+                    : "none",
+              }}
+            >
+              <img
+                src={option.icon}
+                width={24}
+                height={24}
+                alt={option.label}
+                className="option-icon"
+              />
+              <p>{option.label}</p>
+         </button>
+       ))}
+        </div>
+      )}
     </div>
   );
 }

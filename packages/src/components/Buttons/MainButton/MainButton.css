@@ -1,0 +1,27 @@
+@import "../../../styles/variables.css";
+
+.main-button--primary {
+  background-color: var(--primary);
+}
+
+.main-button--green {
+  background-color: var(--green);
+}
+
+.main-button--blue {
+  background-color: var(--blue);
+}
+
+.main-button-container {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.main-button-container:hover {
+  transform: scale(1.05);
+}

@@ -7,6 +7,7 @@
   cursor: pointer;
   border: 1px solid rgba(0,0,0,0.1);
   transition: all 0.2s ease-in-out;
+  background-color: rgb(255,255,255);
 }
 
 .toggle-container.active--primary {

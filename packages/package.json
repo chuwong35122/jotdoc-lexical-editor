@@ -52,5 +52,9 @@
   "bugs": {
     "url": "https://github.com/chuwong35122/jotdoc-lexical-editor/issues"
   },
-  "homepage": "https://github.com/chuwong35122/jotdoc-lexical-editor#readme"
+  "homepage": "https://github.com/chuwong35122/jotdoc-lexical-editor#readme",
+  "dependencies": {
+    "@lexical/react": "^0.12.2",
+    "lexical": "^0.12.2"
+  }
 }

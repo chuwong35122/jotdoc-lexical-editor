@@ -2,6 +2,8 @@ import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { SelectIconOption } from "../../types/select.interface";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
 import "./DropdownSelector.css";
+import { Theme } from "../../types/theme.interface";
+import { THEME_COLORS } from "../../constants/themes";
 
 interface DropdownSelectorProps {
   options: SelectIconOption[];
@@ -9,6 +11,7 @@ interface DropdownSelectorProps {
   setActiveIndex: Dispatch<SetStateAction<number>>;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  color?: Theme;
 }
 
 function DropdownSelector(props: DropdownSelectorProps) {
@@ -23,6 +26,10 @@ function DropdownSelector(props: DropdownSelectorProps) {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
   }, []);
 
   function toggleOpen() {
@@ -34,6 +41,10 @@ function DropdownSelector(props: DropdownSelectorProps) {
 
     props.setActiveIndex(target)
     props.setIsOpen(false);
+  }
+
+  function getActiveItemBgColor(color?: Theme) {
+    return THEME_COLORS[color ?? 'primary'].option
   }
 
   return (
@@ -74,6 +85,7 @@ function DropdownSelector(props: DropdownSelectorProps) {
                   index === SELECT_ICON_OPTIONS.length - 1
                     ? "0 0 0.5rem 0.5rem"
                     : "none",
+                backgroundColor: index === activeIndex ? getActiveItemBgColor(props.color) : 'white'
               }}
             >
               <img

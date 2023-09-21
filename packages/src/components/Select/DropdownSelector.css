@@ -31,7 +31,8 @@
   cursor: pointer;
   transition: all 0.2 ease-in-out;
   border: 0;
-  width: 100%;
+  width: 12rem;
+  max-width: 12rem;
 }
 
 .select-option-wrapper {
@@ -39,6 +40,8 @@
   border-radius: 0.25rem;
   margin-top: 0.25rem;
   overflow: hidden;
+  position: absolute;
+  z-index: 50;
 }
 
 .select-option:hover{

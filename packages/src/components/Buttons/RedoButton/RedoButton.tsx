@@ -13,19 +13,19 @@ export interface RedoButtonProps extends HTMLAttributes<HTMLButtonElement> {
 function RedoButton(props: RedoButtonProps) {
   function getActiveColor(color?: Theme) {
     if (color === "blue") {
-      return "toggle-container active--blue";
+      return "redo-container active--blue";
     } else if (color === "green") {
-      return "toggle-container active--green";
+      return "redo-container active--green";
     }
 
-    return "toggle-container active--primary";
+    return "redo-container active--primary";
   }
 
   return (
     <button
       type="button"
       className={[
-        props.state ? getActiveColor(props.color) : "toggle-container",
+        props.state ? getActiveColor(props.color) : "redo-container",
       ].join(" ")}
       {...props}
     >

@@ -13,19 +13,19 @@ export interface UndoButtonProps extends HTMLAttributes<HTMLButtonElement> {
 function UndoButton(props: UndoButtonProps) {
   function getActiveColor(color?: Theme) {
     if (color === "blue") {
-      return "toggle-container active--blue";
+      return "undo-container active--blue";
     } else if (color === "green") {
-      return "toggle-container active--green";
+      return "undo-container active--green";
     }
 
-    return "toggle-container active--primary";
+    return "undo-container active--primary";
   }
 
   return (
     <button
       type="button"
       className={[
-        props.state ? getActiveColor(props.color) : "toggle-container",
+        props.state ? getActiveColor(props.color) : "undo-container",
       ].join(" ")}
       {...props}
     >

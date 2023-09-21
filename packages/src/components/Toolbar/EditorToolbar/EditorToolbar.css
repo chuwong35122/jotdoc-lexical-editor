@@ -1,0 +1,14 @@
+.toolbar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: space-between;
+  gap: 0.25rem;
+}
+
+.divider {
+  width: 1px;
+  height: 30px;
+  background-color: rgba(0,0,0,0.1);
+  margin: 0 0.5rem;
+}

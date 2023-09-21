@@ -1,16 +1,17 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { SelectIconOption } from "../../types/select.interface";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
-import "./BlockContentSelector.css";
+import "./DropdownSelector.css";
 
-interface BlockContentSelectorProps {
+interface DropdownSelectorProps {
   options: SelectIconOption[];
   activeIndex: number;
+  setActiveIndex: Dispatch<SetStateAction<number>>;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-function BlockContentSelector(props: BlockContentSelectorProps) {
+function DropdownSelector(props: DropdownSelectorProps) {
   const { options, activeIndex } = props;
   const selector = useRef<HTMLDivElement>(null);
 
@@ -26,6 +27,13 @@ function BlockContentSelector(props: BlockContentSelectorProps) {
 
   function toggleOpen() {
     props.setIsOpen((prev) => !prev);
+  }
+
+  function onClickItem(target: number) {
+    if (target === activeIndex) return
+
+    props.setActiveIndex(target)
+    props.setIsOpen(false);
   }
 
   return (
@@ -55,6 +63,7 @@ function BlockContentSelector(props: BlockContentSelectorProps) {
           {SELECT_ICON_OPTIONS.map((option, index) => (
             <button
               key={index}
+              onClick={() => onClickItem(index)}
               className={["select-option"].join(" ")}
               style={{
                 borderBottom:
@@ -75,12 +84,12 @@ function BlockContentSelector(props: BlockContentSelectorProps) {
                 className="option-icon"
               />
               <p>{option.label}</p>
-         </button>
-       ))}
+            </button>
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-export default BlockContentSelector;
+export default DropdownSelector;

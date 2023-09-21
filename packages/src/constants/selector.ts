@@ -1,24 +1,50 @@
 import { SelectIconOption } from "../types/select.interface";
+import { BlockTypes } from "./block";
 
 export const SELECT_ICON_OPTIONS: SelectIconOption[] = [
   {
     icon: "/icons/text-cursor.svg",
-    value: "text",
+    value: BlockTypes.Text,
     label: "Text",
   },
   {
     icon: "/icons/heading-1.svg",
-    value: "heading_1",
+    value: BlockTypes.Heading1,
     label: "Heading 1",
   },
   {
     icon: "/icons/heading-2.svg",
-    value: "heading_2",
+    value: BlockTypes.Heading2,
     label: "Heading 2",
   },
   {
     icon: "/icons/heading-3.svg",
-    value: "heading_3",
+    value: BlockTypes.Heading3,
     label: "Heading 3",
+  },
+  {
+    icon: "/icons/list-ordered.svg",
+    value: BlockTypes.OL,
+    label: "Ordered List",
+  },
+  {
+    icon: "/icons/list.svg",
+    value: BlockTypes.UL,
+    label: "Unordered List",
+  },
+  {
+    icon: "/icons/list-todo.svg",
+    value: BlockTypes.CL,
+    label: "Check List",
+  },
+  {
+    icon: "/icons/text-quote.svg",
+    value: BlockTypes.Quote,
+    label: "Quote",
+  },
+  {
+    icon: "/icons/code.svg",
+    value: BlockTypes.Code,
+    label: "Code",
   },
 ];

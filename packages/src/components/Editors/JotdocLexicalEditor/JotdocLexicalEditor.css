@@ -12,12 +12,12 @@ body {
 }
 
 [contenteditable] {
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid #e0e0e0;
 }
 
 [contenteditable]:focus {
   outline: 0px solid transparent;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid #b3b3b3;
 }
 
 .editable-placeholder {

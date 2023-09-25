@@ -10,17 +10,17 @@
   padding: 0 0.25rem 0 0.25rem;
   border-radius: 0.25rem;
   width: 12rem;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all 0.2 ease-in-out;
   background-color: white;
 }
 
 .chevron {
-    opacity: 0.2;
-  }
+  opacity: 0.2;
+}
 
-.select-button-container:hover{
-  background-color: rgba(0,0,0,0.05)
+.select-button-container:hover {
+  background-color: #e0e0e0;
 }
 
 .select-option {
@@ -36,7 +36,7 @@
 }
 
 .select-option-wrapper {
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid #e0e0e0;
   border-radius: 0.25rem;
   margin-top: 0.25rem;
   overflow: hidden;
@@ -44,8 +44,8 @@
   z-index: 50;
 }
 
-.select-option:hover{
-  background-color: rgba(0,0,0,0.05)
+.select-option:hover {
+  background-color: #e0e0e0;
 }
 
 .option-icon {

@@ -85,7 +85,7 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
                 borderBottom:
                   index === options.length - 1
                     ? "none"
-                    : "1px solid rgba(0,0,0,0.05)",
+                    : "1px solid #e0e0e0",
                 borderRadius:
                   index === options.length - 1
                     ? "0 0 0.5rem 0.5rem"

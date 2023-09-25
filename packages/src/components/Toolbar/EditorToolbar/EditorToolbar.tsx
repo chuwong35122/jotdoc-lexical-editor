@@ -11,6 +11,8 @@ import ClickableSelector from "../../ComponentSelector/ComponentSelector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 import FontSizeSelector from "../../FontSizeSelector/FontSizeSelector";
 import { FONT_SIZE_OPTIONS } from "../../../constants/themes";
+import ColorPallette from "../../ColorPallette/ColorPallette";
+import { RGBColor } from "react-color";
 
 interface EditorToolbarProps { }
 
@@ -19,7 +21,21 @@ function EditorToolbar(props: EditorToolbarProps) {
   const [blockSelectorOpen, setBlockSelectorOpen] = useState(false);
   const [componentSelectorOpen, setComponentSelectorOpen] = useState(false);
   const [fontSizeSelectorOpen, setFontSizeSelectorOpen] = useState(false);
+  const [highlighterOpen, setHighlighterOpen] = useState(false);
+  const [colorOpen, setColorOpen] = useState(false);
+
   const [activeIndex, setActiveIndex] = useState(0);
+
+  function handleSetHighlighterColor(color: RGBColor) {
+    color.a = 0.5;
+    const _color = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+    context.setHighlightedColor(_color);
+  }
+
+  function setFontColor(color: RGBColor) {
+    const _color = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+    context.setFontColor(_color);
+  }
 
   return (
     <div className="toolbar-container">
@@ -69,6 +85,22 @@ function EditorToolbar(props: EditorToolbarProps) {
         iconSrc={"/icons/strikethrough.svg"}
         state={context.isStrikethrough}
         name="strikethrough"
+      />
+      <ColorPallette
+        iconSrc="/icons/baseline.svg"
+        name="Color"
+        activeColor={context.fontColor}
+        isOpen={colorOpen}
+        setIsOpen={setColorOpen}
+        onSelect={setFontColor}
+      />
+      <ColorPallette
+        iconSrc="/icons/highlighter.svg"
+        name="Highlighter"
+        activeColor={context.highlightedColor}
+        isOpen={highlighterOpen}
+        setIsOpen={setHighlighterOpen}
+        onSelect={handleSetHighlighterColor}
       />
       <div className="divider" />
       <ClickableSelector

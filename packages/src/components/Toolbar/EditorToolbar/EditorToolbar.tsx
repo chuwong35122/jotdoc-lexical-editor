@@ -9,6 +9,8 @@ import {
 } from "../../../constants/selector";
 import ClickableSelector from "../../ComponentSelector/ComponentSelector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
+import FontSizeSelector from "../../FontSizeSelector/FontSizeSelector";
+import { FONT_SIZE_OPTIONS } from "../../../constants/themes";
 
 interface EditorToolbarProps { }
 
@@ -16,6 +18,7 @@ function EditorToolbar(props: EditorToolbarProps) {
   const context = useContext(EditorToolbarContext);
   const [blockSelectorOpen, setBlockSelectorOpen] = useState(false);
   const [componentSelectorOpen, setComponentSelectorOpen] = useState(false);
+  const [fontSizeSelectorOpen, setFontSizeSelectorOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -42,6 +45,7 @@ function EditorToolbar(props: EditorToolbarProps) {
         color={"primary"}
       />
       <div className="divider" />
+      <FontSizeSelector options={FONT_SIZE_OPTIONS} isOpen={fontSizeSelectorOpen} setIsOpen={setFontSizeSelectorOpen} />
       <IconToggle
         iconSrc={"/icons/bold.svg"}
         state={context.isBold}

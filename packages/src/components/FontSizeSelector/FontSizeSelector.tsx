@@ -75,10 +75,6 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
                   index === options.length - 1
                     ? "0 0 0.5rem 0.5rem"
                     : "none",
-                backgroundColor:
-                  option === fontSize
-                    ? getActiveItemBgColor(props.color)
-                    : "white",
               }}
             >
               <p>{option}</p>

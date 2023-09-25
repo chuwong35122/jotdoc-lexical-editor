@@ -10,9 +10,13 @@
   padding: 0 0.25rem 0 0.25rem;
   border-radius: 0.25rem;
   width: 5rem;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all 0.2 ease-in-out;
   background-color: white;
+}
+
+.font-size-select-button-container:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .font-size-select-option {
@@ -27,6 +31,6 @@
   max-width: 5rem;
 }
 
-.font-size-select-option:hover{
-  background-color: rgba(0,0,0,0.05)
+.font-size-select-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }

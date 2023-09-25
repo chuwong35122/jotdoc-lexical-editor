@@ -13,6 +13,7 @@ import "./JotdocLexicalEditor.css";
 import MainButton from "../../Buttons/MainButton/MainButton";
 import EditorToolbarContextProvider from "../../../contexts/EditorToolbarContext";
 import EditorToolbar from "../../Toolbar/EditorToolbar/EditorToolbar";
+import { MainEditorTheme } from "../../../constants/editor";
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -24,6 +25,7 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
 
   const initialConfig: InitialConfigType = {
     namespace: props.namespace,
+    theme: MainEditorTheme,
     onError: (e, editorState) => {
       console.log(e);
       console.log(editorState);

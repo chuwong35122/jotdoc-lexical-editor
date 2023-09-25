@@ -57,7 +57,6 @@
   "dependencies": {
     "@lexical/react": "^0.12.2",
     "lexical": "^0.12.2",
-    "react-color": "^2.19.3",
-    "react-svg": "^16.1.25"
+    "react-color": "^2.19.3"
   }
 }

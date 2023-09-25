@@ -3,19 +3,21 @@ import "./EditorToolbar.css";
 import IconToggle from "../../Toggles/IconToggle/IconToggle";
 import { EditorToolbarContext } from "../../../contexts/EditorToolbarContext";
 import DropdownSelector from "../../Select/DropdownSelector";
-import {
-  SELECT_ICON_OPTIONS,
-} from "../../../constants/selector";
+import { SELECT_ICON_OPTIONS } from "../../../constants/selector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 import FontSizeSelector from "../../FontSizeSelector/FontSizeSelector";
 import { FONT_SIZE_OPTIONS } from "../../../constants/themes";
 import ColorPallette from "../../ColorPallette/ColorPallette";
 import { RGBColor } from "react-color";
+import { REDO_COMMAND, UNDO_COMMAND } from "lexical";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 interface EditorToolbarProps { }
 
 function EditorToolbar(props: EditorToolbarProps) {
   const context = useContext(EditorToolbarContext);
+  const [editor] = useLexicalComposerContext();
+
   const [blockSelectorOpen, setBlockSelectorOpen] = useState(false);
   const [fontSizeSelectorOpen, setFontSizeSelectorOpen] = useState(false);
   const [highlighterOpen, setHighlighterOpen] = useState(false);
@@ -37,16 +39,18 @@ function EditorToolbar(props: EditorToolbarProps) {
   return (
     <div className="toolbar-container">
       <ClickableButton
+        disabled={!context.canUndo}
         name="undo"
         state={false}
         iconSrc="/icons/undo-2.svg"
-        onClick={() => console.log("Undo!")}
+        onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
       />
       <ClickableButton
+        disabled={!context.canRedo}
         name="redo"
         state={false}
         iconSrc="/icons/redo-2.svg"
-        onClick={() => console.log("Redo!")}
+        onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
       />
       <div className="v-divider" />
       <DropdownSelector

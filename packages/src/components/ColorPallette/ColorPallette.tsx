@@ -35,7 +35,7 @@ function ColorPallette(props: ColorPalletteProps) {
 
   return (
     <div ref={selector}>
-      <button className="toggle-container" onClick={handleClickButton}>
+      <button onClick={handleClickButton} className="toggle-container">
         <img src={iconSrc} width={24} height={24} alt={name} />
       </button>
       <div className="picker-dropdown">

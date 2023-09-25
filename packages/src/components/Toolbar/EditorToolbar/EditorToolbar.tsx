@@ -6,7 +6,6 @@ import DropdownSelector from "../../Select/DropdownSelector";
 import {
   SELECT_ICON_OPTIONS,
 } from "../../../constants/selector";
-import ClickableSelector from "../../ComponentSelector/ComponentSelector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 import FontSizeSelector from "../../FontSizeSelector/FontSizeSelector";
 import { FONT_SIZE_OPTIONS } from "../../../constants/themes";

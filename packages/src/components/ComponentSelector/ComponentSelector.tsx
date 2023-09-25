@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { SelectIconOption } from "../../types/select.interface";
-import { SELECT_ICON_OPTIONS } from "../../constants/selector";
 
 interface ClickableSelectorProps {
   options: SelectIconOption[];
@@ -63,11 +62,11 @@ function ClickableSelector(props: ClickableSelectorProps) {
               className={["select-option"].join(" ")}
               style={{
                 borderBottom:
-                  index === SELECT_ICON_OPTIONS.length - 1
+                  index === options.length - 1
                     ? "none"
                     : "1px solid rgba(0,0,0,0.1)",
                 borderRadius:
-                  index === SELECT_ICON_OPTIONS.length - 1
+                  index === options.length - 1
                     ? "0 0 0.5rem 0.5rem"
                     : "none"
               }}

@@ -1,6 +1,6 @@
 @import "../../../styles/variables.css";
 
-.redo-container {
+.clickable-button-container {
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 0;
@@ -9,14 +9,14 @@
   transition: all 0.2s ease-in-out;
 }
 
-.redo-container.active--primary {
+.clickable-button-container.active--primary {
   background-color: var(--primary);
 }
 
-.redo-container.active--green {
+.clickable-button-container.active--green {
   background-color: var(--green);
 }
 
-.redo-container.active--blue {
+.clickable-button-container.active--blue {
   background-color: var(--blue);
 }

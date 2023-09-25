@@ -1,8 +1,9 @@
 import React, { HTMLAttributes } from "react";
-import "./UndoButton.css";
+import "./ClickableButton.css";
 import { Theme } from "../../../types/theme.interface";
 
-export interface UndoButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ClickableButtonProps
+  extends HTMLAttributes<HTMLButtonElement> {
   iconSrc: string;
   name: string;
   state: boolean;
@@ -10,22 +11,24 @@ export interface UndoButtonProps extends HTMLAttributes<HTMLButtonElement> {
   color?: Theme;
 }
 
-function UndoButton(props: UndoButtonProps) {
+function ClickableButton(props: ClickableButtonProps) {
   function getActiveColor(color?: Theme) {
     if (color === "blue") {
-      return "undo-container active--blue";
+      return "clickable-button-container active--blue";
     } else if (color === "green") {
-      return "undo-container active--green";
+      return "clickable-button-container active--green";
     }
 
-    return "undo-container active--primary";
+    return "clickable-button-container active--primary";
   }
 
   return (
     <button
       type="button"
       className={[
-        props.state ? getActiveColor(props.color) : "undo-container",
+        props.state
+          ? getActiveColor(props.color)
+          : "clickable-button-container",
       ].join(" ")}
       {...props}
     >
@@ -40,4 +43,4 @@ function UndoButton(props: UndoButtonProps) {
   );
 }
 
-export default UndoButton;
+export default ClickableButton;

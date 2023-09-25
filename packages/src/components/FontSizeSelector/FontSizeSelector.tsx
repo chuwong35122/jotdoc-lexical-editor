@@ -1,9 +1,12 @@
-import React, { Dispatch, SetStateAction, useContext, useEffect, useRef } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useContext, useEffect, useRef } from "react";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
 import "./FontSizeSelector.css";
 import { Theme } from "../../types/theme.interface";
 import { THEME_COLORS } from "../../constants/themes";
 import { EditorToolbarContext } from "../../contexts/EditorToolbarContext";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getSelection, $isRangeSelection } from "lexical";
+import { $patchStyleText } from '@lexical/selection';
 
 interface FontSizeSelectorProps {
   options: string[];
@@ -16,6 +19,7 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
   const { options, isOpen, setIsOpen, color } = props;
   const { fontSize, setFontSize } = useContext(EditorToolbarContext);
 
+  const [editor] = useLexicalComposerContext()
   const selector = useRef<HTMLDivElement>(null);
 
   function handleClickOutside(event: MouseEvent) {
@@ -38,12 +42,23 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
 
   function onClickItem(option: string) {
     props.setIsOpen(false);
-    setFontSize(option)
+    handleSelectFontSize(option)
   }
 
-  function getActiveItemBgColor(color?: Theme) {
-    return THEME_COLORS[color ?? "primary"].option;
-  }
+  const handleSelectFontSize = useCallback(
+    (option: string) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, {
+            ['font-size']: option,
+          });
+        }
+      });
+    },
+    [editor],
+  );
+
 
   return (
     <div ref={selector} className="font-size-selector-container">

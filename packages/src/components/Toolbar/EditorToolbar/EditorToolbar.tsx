@@ -10,7 +10,7 @@ import { FONT_SIZE_OPTIONS } from "../../../constants/themes";
 import ColorPallette from "../../ColorPallette/ColorPallette";
 import { RGBColor } from "react-color";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getSelection, $isRangeSelection, FORMAT_TEXT_COMMAND, REDO_COMMAND, UNDO_COMMAND } from "lexical";
+import { $getSelection, $isRangeSelection, FORMAT_ELEMENT_COMMAND, FORMAT_TEXT_COMMAND, REDO_COMMAND, UNDO_COMMAND } from "lexical";
 import { $patchStyleText } from '@lexical/selection';
 
 interface EditorToolbarProps { }
@@ -135,25 +135,25 @@ function EditorToolbar(props: EditorToolbarProps) {
         name="align-left"
         state={false}
         iconSrc="/icons/align-left.svg"
-        onClick={() => console.log("Left!")}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
       />
       <ClickableButton
         name="align-center"
         state={false}
         iconSrc="/icons/align-center.svg"
-        onClick={() => console.log("Center!")}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
       />
       <ClickableButton
         name="align-left"
         state={false}
         iconSrc="/icons/align-right.svg"
-        onClick={() => console.log("Right!")}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'end')}
       />
       <ClickableButton
         name="align-left"
         state={false}
         iconSrc="/icons/align-justify.svg"
-        onClick={() => console.log("Justify!")}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
       />
     </div>
   );

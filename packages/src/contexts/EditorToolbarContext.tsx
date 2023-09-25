@@ -6,8 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { BlockTypes } from "../constants/block";
-import { $getSelection, $isRangeSelection } from "lexical";
+import { $getSelection, $isRangeSelection, CAN_REDO_COMMAND, CAN_UNDO_COMMAND, COMMAND_PRIORITY_CRITICAL } from "lexical";
 import { $isListNode, ListNode } from "@lexical/list";
 import { $isLinkNode } from "@lexical/link";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
@@ -21,6 +20,8 @@ interface EditorToolbarContextStruct {
   blockType: BlockType;
   setBlockType: Dispatch<SetStateAction<BlockType>>;
   selectedElementKey: any;
+  canUndo: boolean
+  canRedo: boolean
   fontSize: string;
   setFontSize: Dispatch<SetStateAction<string>>;
   isBold: boolean;
@@ -53,6 +54,9 @@ const EditorToolbarContextProvider = ({ ...props }) => {
   const [blockType, setBlockType] = useState<BlockType>("Text");
   const [editor] = useLexicalComposerContext();
   const [selectedElementKey, setSelectedElementKey] = useState<any>();
+
+  const [canUndo, setCanUndo] = useState(false)
+  const [canRedo, setCanRedo] = useState(false)
 
   const [fontSize, setFontSize] = useState<string>(DEFAULT_TEXT.fontSize);
 
@@ -149,6 +153,29 @@ const EditorToolbarContextProvider = ({ ...props }) => {
 
   useEffect(() => {
     return mergeRegister(
+      editor.registerCommand<boolean>(
+        CAN_UNDO_COMMAND,
+        payload => {
+          setCanUndo(payload);
+          return false;
+        },
+        COMMAND_PRIORITY_CRITICAL,
+      ),
+
+      editor.registerCommand<boolean>(
+        CAN_REDO_COMMAND,
+        payload => {
+          setCanRedo(payload);
+          return false;
+        },
+        COMMAND_PRIORITY_CRITICAL,
+      ),
+    );
+  }, [editor]);
+
+
+  useEffect(() => {
+    return mergeRegister(
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
           updateToolbar();
@@ -161,6 +188,8 @@ const EditorToolbarContextProvider = ({ ...props }) => {
     blockType,
     setBlockType,
     selectedElementKey,
+    canUndo,
+    canRedo,
     fontSize,
     setFontSize,
     isBold,

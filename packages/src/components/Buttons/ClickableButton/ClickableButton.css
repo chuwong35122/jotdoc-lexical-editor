@@ -10,6 +10,12 @@
   transition: all 0.2s ease-in-out;
 }
 
+.clickable-button-container:disabled {
+  background-color: rgba(0,0,0,0.05);
+  cursor: not-allowed;
+  filter: opacity(0.5);
+}
+
 .clickable-button-container.active--primary {
   background-color: var(--primary);
 }

@@ -9,6 +9,7 @@ export interface ClickableButtonProps
   state: boolean;
   onClick?: () => void;
   color?: Theme;
+  disabled?: boolean;
 }
 
 function ClickableButton(props: ClickableButtonProps) {

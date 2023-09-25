@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { SelectIconOption } from "../../types/select.interface";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
-import "./ClickableSelector.css";
 
 interface ClickableSelectorProps {
   options: SelectIconOption[];
@@ -36,7 +35,7 @@ function ClickableSelector(props: ClickableSelectorProps) {
   }
 
   return (
-    <div ref={selector} className="select-container">
+    <div ref={selector} className="dropdown-container">
       <button onClick={toggleOpen} className="select-button-container">
         <img
           src='/icons/puzzle.svg'

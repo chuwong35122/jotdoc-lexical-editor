@@ -47,9 +47,6 @@ export const SELECT_ICON_OPTIONS: SelectIconOption[] = [
     value: BlockTypes.Code,
     label: "Code",
   },
-];
-
-export const SELECT_COMPONENT_OPTIONS: SelectIconOption[] = [
   {
     icon: "/icons/separator-horizontal.svg",
     value: ComponentTypes.Divider,

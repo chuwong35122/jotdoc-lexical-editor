@@ -80,7 +80,7 @@ function DropdownSelector(props: DropdownSelectorProps) {
                 borderBottom:
                   index === SELECT_ICON_OPTIONS.length - 1
                     ? "none"
-                    : "1px solid rgba(0,0,0,0.1)",
+                    : "1px solid rgba(0,0,0,0.05)",
                 borderRadius:
                   index === SELECT_ICON_OPTIONS.length - 1
                     ? "0 0 0.5rem 0.5rem"

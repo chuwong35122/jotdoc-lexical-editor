@@ -12,6 +12,16 @@ const meta: Meta<typeof DropdownSelector> = {
 export default meta;
 type Story = StoryObj<typeof DropdownSelector>;
 
+export const ClosedSelectorComponent: Story = {
+  args: {
+    options: SELECT_ICON_OPTIONS,
+    color: "primary",
+    activeIndex: 0,
+    isOpen: false
+  },
+};
+
+
 export const BlockTypePrimarySelector: Story = {
   args: {
     options: SELECT_ICON_OPTIONS,

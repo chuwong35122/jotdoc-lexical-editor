@@ -14,3 +14,5 @@ export enum BlockTypeEnum {
 
 export type BlockType = keyof typeof BlockTypes;
 export type BlockTypeValue = (typeof BlockTypes)[BlockType];
+
+export type TextAlignType = "left" | "center" | "right" | "justify";

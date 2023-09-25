@@ -8,6 +8,7 @@ import {
   SELECT_ICON_OPTIONS,
 } from "../../../constants/selector";
 import ClickableSelector from "../../ClickableSelector/ClickableSelector";
+import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 
 interface EditorToolbarProps { }
 
@@ -19,17 +20,17 @@ function EditorToolbar(props: EditorToolbarProps) {
 
   return (
     <div className="toolbar-container">
-      <IconToggle
-        iconSrc={"/icons/undo-2.svg"}
+      <ClickableButton
+        name='undo'
         state={false}
-        name="undo"
-        // TODO: Add onClick & Disabled indicator
+        iconSrc='/icons/undo-2.svg'
+        onClick={() => console.log("Undo!")}
       />
-      <IconToggle
-        iconSrc={"/icons/redo-2.svg"}
+      <ClickableButton
+        name='redo'
         state={false}
-        name="redo"
-        // TODO: Add onClick & Disabled indicator
+        iconSrc='/icons/redo-2.svg'
+        onClick={() => console.log("Redo!")}
       />
       <div className="divider" />
       <DropdownSelector

@@ -13,17 +13,12 @@ export const THEME_COLORS = {
   },
 };
 
-export const DEFAULT_TEXT: {
-  color: string;
-  fontSize: string;
-  fontFamily: string;
-  highlight: string;
-} = {
+export const DEFAULT_TEXT = {
   color: "rgba(0,0,0,1)",
   fontSize: "16px",
   fontFamily: "Arial",
   highlight: "rgba(0,0,0,0)",
-};
+} as const;
 
 export const FONT_SIZE_OPTIONS = [
   "8px",

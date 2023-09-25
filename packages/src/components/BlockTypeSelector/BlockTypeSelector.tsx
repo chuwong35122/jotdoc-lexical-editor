@@ -84,8 +84,7 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
                 borderRadius:
                   index === SELECT_ICON_OPTIONS.length - 1
                     ? "0 0 0.5rem 0.5rem"
-                    : "none",
-                backgroundColor: index === activeIndex ? getActiveItemBgColor(props.color) : 'white'
+                    : "none"
               }}
             >
               <img

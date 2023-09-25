@@ -24,15 +24,15 @@ function EditorToolbar(props: EditorToolbarProps) {
   return (
     <div className="toolbar-container">
       <ClickableButton
-        name='undo'
+        name="undo"
         state={false}
-        iconSrc='/icons/undo-2.svg'
+        iconSrc="/icons/undo-2.svg"
         onClick={() => console.log("Undo!")}
       />
       <ClickableButton
-        name='redo'
+        name="redo"
         state={false}
-        iconSrc='/icons/redo-2.svg'
+        iconSrc="/icons/redo-2.svg"
         onClick={() => console.log("Redo!")}
       />
       <div className="divider" />
@@ -45,7 +45,11 @@ function EditorToolbar(props: EditorToolbarProps) {
         color={"primary"}
       />
       <div className="divider" />
-      <FontSizeSelector options={FONT_SIZE_OPTIONS} isOpen={fontSizeSelectorOpen} setIsOpen={setFontSizeSelectorOpen} />
+      <FontSizeSelector
+        options={FONT_SIZE_OPTIONS}
+        isOpen={fontSizeSelectorOpen}
+        setIsOpen={setFontSizeSelectorOpen}
+      />
       <IconToggle
         iconSrc={"/icons/bold.svg"}
         state={context.isBold}

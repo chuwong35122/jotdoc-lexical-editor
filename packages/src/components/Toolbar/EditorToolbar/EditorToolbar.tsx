@@ -133,25 +133,25 @@ function EditorToolbar(props: EditorToolbarProps) {
       <div className="v-divider" />
       <ClickableButton
         name="align-left"
-        state={false}
+        state={context.textAlign === "left"}
         iconSrc="/icons/align-left.svg"
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
       />
       <ClickableButton
         name="align-center"
-        state={false}
+        state={context.textAlign === 'center'}
         iconSrc="/icons/align-center.svg"
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
       />
       <ClickableButton
-        name="align-left"
-        state={false}
+        name="align-right"
+        state={context.textAlign === 'end'}
         iconSrc="/icons/align-right.svg"
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'end')}
       />
       <ClickableButton
-        name="align-left"
-        state={false}
+        name="align-justify"
+        state={context.textAlign === 'justify'}
         iconSrc="/icons/align-justify.svg"
         onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
       />

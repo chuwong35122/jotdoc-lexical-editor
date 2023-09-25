@@ -6,22 +6,30 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { $getSelection, $isRangeSelection, CAN_REDO_COMMAND, CAN_UNDO_COMMAND, COMMAND_PRIORITY_CRITICAL } from "lexical";
+import {
+  $getSelection,
+  $isElementNode,
+  $isRangeSelection,
+  CAN_REDO_COMMAND,
+  CAN_UNDO_COMMAND,
+  COMMAND_PRIORITY_CRITICAL,
+  RangeSelection,
+} from "lexical";
 import { $isListNode, ListNode } from "@lexical/list";
 import { $isLinkNode } from "@lexical/link";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { DEFAULT_TEXT } from "../constants/themes";
 import { $getSelectionStyleValueForProperty } from "@lexical/selection";
-import { BlockType } from "../types/block.interface";
+import { BlockType, TextAlignType } from "../types/block.interface";
 import { getSelectedNode } from "../utils/selection";
 
 interface EditorToolbarContextStruct {
   blockType: BlockType;
   setBlockType: Dispatch<SetStateAction<BlockType>>;
   selectedElementKey: any;
-  canUndo: boolean
-  canRedo: boolean
+  canUndo: boolean;
+  canRedo: boolean;
   fontSize: string;
   setFontSize: Dispatch<SetStateAction<string>>;
   isBold: boolean;
@@ -42,6 +50,7 @@ interface EditorToolbarContextStruct {
   setFontFamily: Dispatch<SetStateAction<string>>;
   highlightedColor: string;
   setHighlightedColor: Dispatch<SetStateAction<string>>;
+  textAlign: string | TextAlignType
   activeComponent: number | null;
   setActiveComponent: Dispatch<SetStateAction<number | null>>;
 }
@@ -55,8 +64,8 @@ const EditorToolbarContextProvider = ({ ...props }) => {
   const [editor] = useLexicalComposerContext();
   const [selectedElementKey, setSelectedElementKey] = useState<any>();
 
-  const [canUndo, setCanUndo] = useState(false)
-  const [canRedo, setCanRedo] = useState(false)
+  const [canUndo, setCanUndo] = useState(false);
+  const [canRedo, setCanRedo] = useState(false);
 
   const [fontSize, setFontSize] = useState<string>(DEFAULT_TEXT.fontSize);
 
@@ -67,17 +76,21 @@ const EditorToolbarContextProvider = ({ ...props }) => {
   const [isCode, setIsCode] = useState(false);
   const [isLink, setIsLink] = useState(false);
 
+  const [textAlign, setTextAlign] = useState<TextAlignType | string>("left");
+
   const [fontColor, setFontColor] = useState<string>(DEFAULT_TEXT.color);
   const [fontFamily, setFontFamily] = useState<string>("Arial");
   const [highlightedColor, setHighlightedColor] = useState<string>(
     DEFAULT_TEXT.highlight
   );
 
-  const [activeComponent, setActiveComponent] = useState<number | null>(null)
+  const [activeComponent, setActiveComponent] = useState<number | null>(null);
 
   // Update toolbar when selection changes
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
+    const node = getSelectedNode(selection as RangeSelection);
+    const parent = node.getParent();
 
     // Get selected nodes
     if ($isRangeSelection(selection)) {
@@ -98,7 +111,8 @@ const EditorToolbarContextProvider = ({ ...props }) => {
           setBlockType(type as BlockType);
         } else {
           const type = element.getType();
-          if (type === "heading") { // TODO: use matching type as 'BlockTypes' object
+          if (type === "heading") {
+          // TODO: use matching type as 'BlockTypes' object
             const tag = element.getTag(); // check for heading node
             setBlockType(tag);
           } else if (type === "paragraph") {
@@ -139,10 +153,15 @@ const EditorToolbarContextProvider = ({ ...props }) => {
         $getSelectionStyleValueForProperty(selection, "font-family", "Arial")
       );
 
+      // $isElementNode(node)
+      setTextAlign(
+        ($isElementNode(node)
+          ? node.getFormatType()
+          : parent?.getFormatType()) || "left"
+      );
+
       setIsCode(selection.hasFormat("code"));
       // Update links
-      const node = getSelectedNode(selection);
-      const parent = node.getParent();
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         setIsLink(true);
       } else {
@@ -155,24 +174,23 @@ const EditorToolbarContextProvider = ({ ...props }) => {
     return mergeRegister(
       editor.registerCommand<boolean>(
         CAN_UNDO_COMMAND,
-        payload => {
+        (payload) => {
           setCanUndo(payload);
           return false;
         },
-        COMMAND_PRIORITY_CRITICAL,
+        COMMAND_PRIORITY_CRITICAL
       ),
 
       editor.registerCommand<boolean>(
         CAN_REDO_COMMAND,
-        payload => {
+        (payload) => {
           setCanRedo(payload);
           return false;
         },
-        COMMAND_PRIORITY_CRITICAL,
-      ),
+        COMMAND_PRIORITY_CRITICAL
+      )
     );
   }, [editor]);
-
 
   useEffect(() => {
     return mergeRegister(
@@ -210,8 +228,9 @@ const EditorToolbarContextProvider = ({ ...props }) => {
     setFontFamily,
     highlightedColor,
     setHighlightedColor,
+    textAlign,
     activeComponent,
-    setActiveComponent
+    setActiveComponent,
   };
 
   return <EditorToolbarContext.Provider value={values} {...props} />;

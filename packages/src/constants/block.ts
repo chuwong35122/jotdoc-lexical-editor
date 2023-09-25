@@ -9,3 +9,9 @@ export const BlockTypes = {
   Quote: "quote",
   Code: "code",
 };
+
+export const ComponentTypes = {
+  Divider: "divider",
+  Image: "image",
+  Table: "table",
+};

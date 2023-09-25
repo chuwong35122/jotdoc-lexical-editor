@@ -41,6 +41,8 @@ interface EditorToolbarContextStruct {
   setFontFamily: Dispatch<SetStateAction<string>>;
   highlightedColor: string;
   setHighlightedColor: Dispatch<SetStateAction<string>>;
+  activeComponent: number | null;
+  setActiveComponent: Dispatch<SetStateAction<number | null>>;
 }
 
 export const EditorToolbarContext = createContext(
@@ -66,6 +68,8 @@ const EditorToolbarContextProvider = ({ ...props }) => {
   const [highlightedColor, setHighlightedColor] = useState<string>(
     DEFAULT_TEXT.highlight
   );
+
+  const [activeComponent, setActiveComponent] = useState<number | null>(null)
 
   // Update toolbar when selection changes
   const updateToolbar = useCallback(() => {
@@ -177,6 +181,8 @@ const EditorToolbarContextProvider = ({ ...props }) => {
     setFontFamily,
     highlightedColor,
     setHighlightedColor,
+    activeComponent,
+    setActiveComponent
   };
 
   return <EditorToolbarContext.Provider value={values} {...props} />;

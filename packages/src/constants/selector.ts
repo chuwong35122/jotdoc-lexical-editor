@@ -1,5 +1,5 @@
 import { SelectIconOption } from "../types/select.interface";
-import { BlockTypes } from "./block";
+import { BlockTypes, ComponentTypes } from "./block";
 
 export const SELECT_ICON_OPTIONS: SelectIconOption[] = [
   {
@@ -46,5 +46,23 @@ export const SELECT_ICON_OPTIONS: SelectIconOption[] = [
     icon: "/icons/code.svg",
     value: BlockTypes.Code,
     label: "Code",
+  },
+];
+
+export const SELECT_COMPONENT_OPTIONS: SelectIconOption[] = [
+  {
+    icon: "/icons/separator-horizontal.svg",
+    value: ComponentTypes.Divider,
+    label: "Divider",
+  },
+  {
+    icon: "/icons/image.svg",
+    value: ComponentTypes.Image,
+    label: "Image",
+  },
+  {
+    icon: "/icons/table.svg",
+    value: ComponentTypes.Table,
+    label: "Table",
   },
 ];

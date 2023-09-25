@@ -27,6 +27,15 @@ function EditorToolbar(props: EditorToolbarProps) {
       // TODO: Add onClick & Disabled indicator
       />
       <div className="divider" />
+      <DropdownSelector
+        options={SELECT_ICON_OPTIONS}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+        isOpen={blockSelectorOpen}
+        setIsOpen={setBlockSelectorOpen}
+        color={"primary"}
+      />
+      <div className='divider' />
       <IconToggle
         iconSrc={"/icons/bold.svg"}
         state={context.isBold}
@@ -48,14 +57,6 @@ function EditorToolbar(props: EditorToolbarProps) {
         name="strikethrough"
       />
       <div className="divider" />
-      <DropdownSelector
-        options={SELECT_ICON_OPTIONS}
-        activeIndex={activeIndex}
-        setActiveIndex={setActiveIndex}
-        isOpen={blockSelectorOpen}
-        setIsOpen={setBlockSelectorOpen}
-        color={"primary"}
-      />
     </div>
   );
 }

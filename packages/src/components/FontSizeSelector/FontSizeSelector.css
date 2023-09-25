@@ -16,7 +16,7 @@
 }
 
 .font-size-select-button-container:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #e0e0e0;
 }
 
 .font-size-select-option {
@@ -32,5 +32,5 @@
 }
 
 .font-size-select-option:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #e0e0e0;
 }

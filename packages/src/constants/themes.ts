@@ -1,15 +1,15 @@
 export const THEME_COLORS = {
   primary: {
     main: "rgba(0, 0, 0, 1)",
-    option: "rgba(0, 0, 0, 0.2)",
+    option: "#e0e0e0",
   },
   green: {
     main: "rgba(14, 143, 51, 1)",
-    option: "rgba(14, 143, 51, 0.2)",
+    option: "#74d48f",
   },
   blue: {
     main: "rgba(0, 125, 255, 1)",
-    option: "rgba(0, 125, 255, 0.2)",
+    option: "#8ec1fa",
   },
 };
 

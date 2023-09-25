@@ -1,14 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
-import UndoButton from "../../components/Buttons/UndoButton/UndoButton";
+import ClickableButton from "../../components/Buttons/ClickableButton/ClickableButton";
 
-const meta: Meta<typeof UndoButton> = {
+const meta: Meta<typeof ClickableButton> = {
   title: "jotdoc-lexical-editor/UndoButton",
-  component: UndoButton,
+  component: ClickableButton,
   tags: ["autodocs"],
 };
 
 export default meta;
-type Story = StoryObj<typeof UndoButton>;
+type Story = StoryObj<typeof ClickableButton>;
 
 export const Normal: Story = {
   args: {
@@ -19,11 +19,32 @@ export const Normal: Story = {
   },
 };
 
-export const Click: Story = {
+export const Primary: Story = {
   args: {
     name: "undo",
     iconSrc: "/icons/undo-2.svg",
     state: true,
     onClick: () => alert("Undo!"),
+    color: "primary",
+  },
+};
+
+export const Green: Story = {
+  args: {
+    name: "undo",
+    iconSrc: "/icons/undo-2.svg",
+    state: true,
+    onClick: () => alert("Undo!"),
+    color: "green",
+  },
+};
+
+export const Blue: Story = {
+  args: {
+    name: "undo",
+    iconSrc: "/icons/undo-2.svg",
+    state: true,
+    onClick: () => alert("Undo!"),
+    color: "blue",
   },
 };

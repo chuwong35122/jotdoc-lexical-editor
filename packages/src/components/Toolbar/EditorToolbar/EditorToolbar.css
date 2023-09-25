@@ -6,7 +6,7 @@
   gap: 0.25rem;
 }
 
-.divider {
+.v-divider {
   width: 1px;
   height: 30px;
   background-color: rgba(0,0,0,0.1);

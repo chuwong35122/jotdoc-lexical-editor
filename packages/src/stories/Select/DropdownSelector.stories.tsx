@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meta, StoryObj } from "@storybook/react";
-import DropdownSelector from "../../components/Select/DropdownSelector";
+import DropdownSelector from "../../components/BlockTypeSelector/BlockTypeSelector";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
 
 const meta: Meta<typeof DropdownSelector> = {

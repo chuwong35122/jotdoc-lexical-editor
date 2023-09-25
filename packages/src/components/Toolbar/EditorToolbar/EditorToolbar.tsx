@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./EditorToolbar.css";
 import IconToggle from "../../Toggles/IconToggle/IconToggle";
 import { EditorToolbarContext } from "../../../contexts/EditorToolbarContext";
-import DropdownSelector from "../../Select/DropdownSelector";
+import BlockTypeSelector from "../../BlockTypeSelector/BlockTypeSelector";
 import { SELECT_ICON_OPTIONS } from "../../../constants/selector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 import FontSizeSelector from "../../FontSizeSelector/FontSizeSelector";
@@ -53,7 +53,7 @@ function EditorToolbar(props: EditorToolbarProps) {
         onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
       />
       <div className="v-divider" />
-      <DropdownSelector
+      <BlockTypeSelector
         options={SELECT_ICON_OPTIONS}
         activeIndex={activeIndex}
         setActiveIndex={setActiveIndex}

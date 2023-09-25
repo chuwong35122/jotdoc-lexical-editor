@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { SelectIconOption } from "../../types/select.interface";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
-import "./DropdownSelector.css";
+import "./BlockTypeSelector.css";
 import { Theme } from "../../types/theme.interface";
 import { THEME_COLORS } from "../../constants/themes";
 
-interface DropdownSelectorProps {
+interface BlockTypeSelectorProps {
   options: SelectIconOption[];
   activeIndex: number;
   setActiveIndex: Dispatch<SetStateAction<number>>;
@@ -14,7 +14,7 @@ interface DropdownSelectorProps {
   color?: Theme;
 }
 
-function DropdownSelector(props: DropdownSelectorProps) {
+function BlockTypeSelector(props: BlockTypeSelectorProps) {
   const { options, activeIndex } = props;
   const selector = useRef<HTMLDivElement>(null);
 
@@ -104,4 +104,4 @@ function DropdownSelector(props: DropdownSelectorProps) {
   );
 }
 
-export default DropdownSelector;
+export default BlockTypeSelector;

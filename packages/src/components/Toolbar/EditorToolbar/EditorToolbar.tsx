@@ -4,7 +4,6 @@ import IconToggle from "../../Toggles/IconToggle/IconToggle";
 import { EditorToolbarContext } from "../../../contexts/EditorToolbarContext";
 import DropdownSelector from "../../Select/DropdownSelector";
 import {
-  SELECT_COMPONENT_OPTIONS,
   SELECT_ICON_OPTIONS,
 } from "../../../constants/selector";
 import ClickableSelector from "../../ComponentSelector/ComponentSelector";
@@ -19,7 +18,6 @@ interface EditorToolbarProps { }
 function EditorToolbar(props: EditorToolbarProps) {
   const context = useContext(EditorToolbarContext);
   const [blockSelectorOpen, setBlockSelectorOpen] = useState(false);
-  const [componentSelectorOpen, setComponentSelectorOpen] = useState(false);
   const [fontSizeSelectorOpen, setFontSizeSelectorOpen] = useState(false);
   const [highlighterOpen, setHighlighterOpen] = useState(false);
   const [colorOpen, setColorOpen] = useState(false);
@@ -51,7 +49,7 @@ function EditorToolbar(props: EditorToolbarProps) {
         iconSrc="/icons/redo-2.svg"
         onClick={() => console.log("Redo!")}
       />
-      <div className="divider" />
+      <div className="v-divider" />
       <DropdownSelector
         options={SELECT_ICON_OPTIONS}
         activeIndex={activeIndex}
@@ -60,7 +58,7 @@ function EditorToolbar(props: EditorToolbarProps) {
         setIsOpen={setBlockSelectorOpen}
         color={"primary"}
       />
-      <div className="divider" />
+      <div className="v-divider" />
       <FontSizeSelector
         options={FONT_SIZE_OPTIONS}
         isOpen={fontSizeSelectorOpen}
@@ -102,11 +100,30 @@ function EditorToolbar(props: EditorToolbarProps) {
         setIsOpen={setHighlighterOpen}
         onSelect={handleSetHighlighterColor}
       />
-      <div className="divider" />
-      <ClickableSelector
-        options={SELECT_COMPONENT_OPTIONS}
-        isOpen={componentSelectorOpen}
-        setIsOpen={setComponentSelectorOpen}
+      <div className="v-divider" />
+      <ClickableButton
+        name="align-left"
+        state={false}
+        iconSrc="/icons/align-left.svg"
+        onClick={() => console.log("Left!")}
+      />
+      <ClickableButton
+        name="align-center"
+        state={false}
+        iconSrc="/icons/align-center.svg"
+        onClick={() => console.log("Center!")}
+      />
+      <ClickableButton
+        name="align-left"
+        state={false}
+        iconSrc="/icons/align-right.svg"
+        onClick={() => console.log("Right!")}
+      />
+      <ClickableButton
+        name="align-left"
+        state={false}
+        iconSrc="/icons/align-justify.svg"
+        onClick={() => console.log("Justify!")}
       />
     </div>
   );

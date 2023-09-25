@@ -7,7 +7,7 @@ import {
   SELECT_COMPONENT_OPTIONS,
   SELECT_ICON_OPTIONS,
 } from "../../../constants/selector";
-import ClickableSelector from "../../ClickableSelector/ClickableSelector";
+import ClickableSelector from "../../ComponentSelector/ComponentSelector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 
 interface EditorToolbarProps { }

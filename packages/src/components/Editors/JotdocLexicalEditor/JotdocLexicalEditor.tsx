@@ -30,6 +30,8 @@ import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import ListMaxIndentLevelPlugin from "../../../plugins/ListMaxIndentPlugin";
 import CodeHighlightPlugin from "../../../plugins/CodeHighlightPlugin";
+import DividerPlugin from "../../../plugins/DividerPlugin";
+import { DividerNode } from "../../../nodes/DividerNode/DividerNode";
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -61,6 +63,7 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
       TableNode,
       TableRowNode,
       TableCellNode,
+      DividerNode,
     ]
   };
 
@@ -95,6 +98,9 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
 
         {/* Code */}
         <CodeHighlightPlugin />
+
+        {/* Divider */}
+        <DividerPlugin />
 
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>

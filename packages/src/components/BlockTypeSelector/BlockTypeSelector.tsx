@@ -24,6 +24,7 @@ import {
 import { EditorToolbarContext } from "../../contexts/EditorToolbarContext";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import BlockTypeSelectorItem from "./BlockTypeSelectorItem";
+import { INSERT_DIVIDER } from "../../plugins/DividerPlugin";
 
 interface BlockTypeSelectorProps {
   options: SelectIconOption[];
@@ -58,9 +59,9 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
   useEffect(() => {
     const index = options.findIndex((option) => option.value === blockType);
     if (index !== -1) {
-      setActiveIndex(index)
+      setActiveIndex(index);
     }
-  }, [blockType])
+  }, [blockType]);
 
   function toggleOpen() {
     props.setIsOpen((prev) => !prev);
@@ -97,55 +98,103 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
           <BlockTypeSelectorItem
             index={0}
             option={SELECT_ICON_OPTIONS[0]}
-            onClick={() => transformParagraphNode(editor, blockType)}
+            onClick={() => {
+              transformParagraphNode(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={1}
             option={SELECT_ICON_OPTIONS[1]}
-            onClick={() => transformH1Node(editor, blockType)}
+            onClick={() => {
+              transformH1Node(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={2}
             option={SELECT_ICON_OPTIONS[2]}
-            onClick={() => transformH2Node(editor, blockType)}
+            onClick={() => {
+              transformH2Node(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={3}
             option={SELECT_ICON_OPTIONS[3]}
-            onClick={() => transformH3Node(editor, blockType)}
+            onClick={() => {
+              transformH3Node(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={4}
             option={SELECT_ICON_OPTIONS[4]}
-            onClick={() => transformOrderedListNode(editor, blockType)}
+            onClick={() => {
+              transformOrderedListNode(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={5}
             option={SELECT_ICON_OPTIONS[5]}
-            onClick={() => transformBulletListNode(editor, blockType)}
+            onClick={() => {
+              transformBulletListNode(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={6}
             option={SELECT_ICON_OPTIONS[6]}
-            onClick={() => transformCheckListNode(editor, blockType)}
+            onClick={() => {
+              transformCheckListNode(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={7}
             option={SELECT_ICON_OPTIONS[7]}
-            onClick={() => transformQuoteNode(editor, blockType)}
+            onClick={() => {
+              transformQuoteNode(editor, blockType);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={8}
             option={SELECT_ICON_OPTIONS[8]}
-            onClick={() => transformCodeNode(editor, blockType)}
+            onClick={() => {
+              transformCodeNode(editor, blockType);
+              props.setIsOpen(false);
+            }}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={9}
+            option={SELECT_ICON_OPTIONS[9]}
+            onClick={() => {
+              editor.dispatchCommand(INSERT_DIVIDER, undefined);
+              props.setIsOpen(false);
+            }}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={10}
+            option={SELECT_ICON_OPTIONS[10]}
+            // onClick={() => }
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={11}
+            option={SELECT_ICON_OPTIONS[11]}
+          // onClick={() => }
             length={SELECT_ICON_OPTIONS.length}
           />
         </div>

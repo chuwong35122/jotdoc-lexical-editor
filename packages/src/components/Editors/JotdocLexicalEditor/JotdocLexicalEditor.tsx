@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import "./JotdocLexicalEditor.css";
+import MainButton from "../../Buttons/MainButton/MainButton";
+
+import { MainEditorTheme } from "../../../constants/editor";
 import { EditorState, ParagraphNode } from "lexical";
 import {
   LexicalComposer,
   InitialConfigType,
 } from "@lexical/react/LexicalComposer";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+
+import EditorToolbar from "../../Toolbar/EditorToolbar/EditorToolbar";
+import EditorToolbarContextProvider from "../../../contexts/EditorToolbarContext";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import "./JotdocLexicalEditor.css";
-import MainButton from "../../Buttons/MainButton/MainButton";
-import EditorToolbarContextProvider from "../../../contexts/EditorToolbarContext";
-import EditorToolbar from "../../Toolbar/EditorToolbar/EditorToolbar";
-import { MainEditorTheme } from "../../../constants/editor";
+
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableNode, TableRowNode, TableCellNode } from '@lexical/table';
 import { ListNode, ListItemNode } from '@lexical/list';
@@ -21,9 +21,13 @@ import { LinkNode, AutoLinkNode } from '@lexical/link';
 import { CodeNode, CodeHighlightNode } from '@lexical/code';
 import { HashtagNode } from '@lexical/hashtag';
 
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import ListMaxIndentLevelPlugin from "../../../plugins/ListMaxIndentPlugin";
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -78,10 +82,12 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
         <HistoryPlugin />
         <OnChangePlugin onChange={handleChange} />
 
+        {/* List */}
         <ListPlugin />
         <TabIndentationPlugin />
-        {/* <ListMaxIndentLevelPlugin maxDepth={7} /> */}
         <CheckListPlugin />
+        <ListMaxIndentLevelPlugin maxDepth={7} />
+
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>
     </LexicalComposer>

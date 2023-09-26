@@ -21,6 +21,10 @@ import { LinkNode, AutoLinkNode } from '@lexical/link';
 import { CodeNode, CodeHighlightNode } from '@lexical/code';
 import { HashtagNode } from '@lexical/hashtag';
 
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
+import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+
 interface JotdocLexicalEditorProps {
   namespace: string;
   onError?: () => string;
@@ -73,6 +77,11 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
         />
         <HistoryPlugin />
         <OnChangePlugin onChange={handleChange} />
+
+        <ListPlugin />
+        <TabIndentationPlugin />
+        {/* <ListMaxIndentLevelPlugin maxDepth={7} /> */}
+        <CheckListPlugin />
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>
     </LexicalComposer>

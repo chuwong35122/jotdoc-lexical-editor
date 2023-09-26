@@ -22,10 +22,6 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
   const [url, setUrl] = useState("");
   const debounced = useDebounce<string>(url, 250);
 
-  const [urlInput, setUrlInput] = useState("");
-
-  const [hasError, setHasError] = useState(false);
-
   useEffect(() => {
     if (isOpen) {
       dialogRef.current?.showModal();
@@ -42,28 +38,6 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
     setIsOpen(false);
   }
 
-  function checkImageValidity(url: string) {
-    let isValid = false;
-
-    var request = new XMLHttpRequest();
-    request.open("GET", url, true);
-    request.send();
-    request.onload = function () {
-      const status = request.status;
-      isValid = status === 200;
-    };
-
-    return isValid;
-  }
-
-  useEffect(() => {
-    const isValid = checkImageValidity(debounced);
-    if (isValid) {
-      setUrlInput(debounced);
-    } else {
-      setUrlInput("");
-    }
-  }, [debounced]);
 
   return (
     <dialog ref={dialogRef} autoFocus onClose={onClose} className="dialog">
@@ -88,7 +62,10 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
               />
             </div>
           )}
-          <MainButton style={{ width: "100%" }}>Upload!</MainButton>
+          {/* @ts-ignore */}
+          <MainButton type="submit" style={{ width: "100%" }}>
+            Upload!
+          </MainButton>
         </div>
       </form>
     </dialog>

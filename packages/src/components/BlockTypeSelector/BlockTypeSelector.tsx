@@ -44,7 +44,7 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
 
   const selector = useRef<HTMLDivElement>(null);
 
-  const [imageUploadOpen, setImageUploadOpen] = useState(!false);
+  const [imageUploadOpen, setImageUploadOpen] = useState(false);
 
   function handleClickOutside(event: MouseEvent) {
     if (!selector.current?.contains(event.target as Node)) {

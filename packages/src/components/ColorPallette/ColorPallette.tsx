@@ -21,7 +21,7 @@ function ColorPallette(props: ColorPalletteProps) {
 
   function handleClickOutside(event: MouseEvent) {
     if (!selector.current?.contains(event.target as Node)) {
-      props.setIsOpen(false);
+      setIsOpen(false);
     }
   }
 

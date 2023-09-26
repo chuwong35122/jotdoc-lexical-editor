@@ -4,6 +4,7 @@ import React, {
   useContext,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import { SelectIconOption } from "../../types/select.interface";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
@@ -25,6 +26,7 @@ import { EditorToolbarContext } from "../../contexts/EditorToolbarContext";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import BlockTypeSelectorItem from "./BlockTypeSelectorItem";
 import { INSERT_HORIZONTAL_RULE_COMMAND } from "@lexical/react/LexicalHorizontalRuleNode";
+import ImageUploadDialog from "../ImageUploadDialog/ImageUploadDialog";
 
 interface BlockTypeSelectorProps {
   options: SelectIconOption[];
@@ -41,6 +43,8 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
   const [editor] = useLexicalComposerContext();
 
   const selector = useRef<HTMLDivElement>(null);
+
+  const [imageUploadOpen, setImageUploadOpen] = useState(!false);
 
   function handleClickOutside(event: MouseEvent) {
     if (!selector.current?.contains(event.target as Node)) {
@@ -73,6 +77,7 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
 
   return (
     <div ref={selector} className="select-container">
+      <ImageUploadDialog isOpen={imageUploadOpen} setIsOpen={setImageUploadOpen} />
       {options[activeIndex] && (
         <button onClick={toggleOpen} className="select-button-container">
           <img
@@ -188,7 +193,10 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
           <BlockTypeSelectorItem
             index={10}
             option={SELECT_ICON_OPTIONS[10]}
-            // onClick={() => }
+            onClick={() => {
+              setImageUploadOpen(true);
+              props.setIsOpen(false);
+            }}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem

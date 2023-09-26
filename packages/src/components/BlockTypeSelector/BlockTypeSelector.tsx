@@ -24,7 +24,7 @@ import {
 import { EditorToolbarContext } from "../../contexts/EditorToolbarContext";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import BlockTypeSelectorItem from "./BlockTypeSelectorItem";
-import { INSERT_DIVIDER } from "../../plugins/DividerPlugin";
+import { INSERT_HORIZONTAL_RULE_COMMAND } from "@lexical/react/LexicalHorizontalRuleNode";
 
 interface BlockTypeSelectorProps {
   options: SelectIconOption[];
@@ -180,7 +180,7 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
             index={9}
             option={SELECT_ICON_OPTIONS[9]}
             onClick={() => {
-              editor.dispatchCommand(INSERT_DIVIDER, undefined);
+              editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined);
               props.setIsOpen(false);
             }}
             length={SELECT_ICON_OPTIONS.length}

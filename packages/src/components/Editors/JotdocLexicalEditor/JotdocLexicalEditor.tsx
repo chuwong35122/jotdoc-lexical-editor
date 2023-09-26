@@ -19,6 +19,7 @@ import { TableNode, TableRowNode, TableCellNode } from '@lexical/table';
 import { ListNode, ListItemNode } from '@lexical/list';
 import { LinkNode, AutoLinkNode } from '@lexical/link';
 import { CodeNode, CodeHighlightNode } from '@lexical/code';
+import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
 import { HashtagNode } from '@lexical/hashtag';
 
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -30,8 +31,7 @@ import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import ListMaxIndentLevelPlugin from "../../../plugins/ListMaxIndentPlugin";
 import CodeHighlightPlugin from "../../../plugins/CodeHighlightPlugin";
-import DividerPlugin from "../../../plugins/DividerPlugin";
-import { DividerNode } from "../../../nodes/DividerNode/DividerNode";
+import { HorizontalRulePlugin } from '@lexical/react/LexicalHorizontalRulePlugin';
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -63,7 +63,7 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
       TableNode,
       TableRowNode,
       TableCellNode,
-      DividerNode,
+      HorizontalRuleNode,
     ]
   };
 
@@ -99,8 +99,8 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
         {/* Code */}
         <CodeHighlightPlugin />
 
-        {/* Divider */}
-        <DividerPlugin />
+        {/* Horizontal Rule */}
+        <HorizontalRulePlugin />
 
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>

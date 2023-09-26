@@ -219,7 +219,7 @@
 .editor-code:before {
   content: attr(data-gutter);
   position: absolute;
-  background-color: #eee;
+  background-color: #EEEEEE;
   left: 0;
   top: 0;
   border-right: 1px solid #ccc;

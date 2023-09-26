@@ -29,6 +29,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import ListMaxIndentLevelPlugin from "../../../plugins/ListMaxIndentPlugin";
+import CodeHighlightPlugin from "../../../plugins/CodeHighlightPlugin";
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -91,6 +92,9 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
         <TabIndentationPlugin />
         <CheckListPlugin />
         <ListMaxIndentLevelPlugin maxDepth={7} />
+
+        {/* Code */}
+        <CodeHighlightPlugin />
 
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>

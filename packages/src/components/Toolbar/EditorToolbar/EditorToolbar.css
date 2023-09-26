@@ -79,10 +79,6 @@
   margin: 0 32px;
 }
 
-.editor-nested-list-item {
-  list-style-type: none;
-}
-
 /* ---------- Ordered List ----------  */
 
 .editor-list-ol-depth-1 {
@@ -148,11 +144,7 @@
   background-size: cover;
   position: absolute;
 }
-.editor-list-item-unchecked[dir="rtl"]:before,
-.editor-list-item-checked[dir="rtl"]:before {
-  left: auto;
-  right: 0;
-}
+
 .editor-list-item-unchecked:focus:before,
 .editor-list-item-checked:focus:before {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
@@ -183,6 +175,15 @@
   height: 6px;
   transform: rotate(45deg);
   border-width: 0 2px 2px 0;
+}
+
+.editor-nested-list-item {
+  list-style-type: none;
+}
+
+.editor-nested-list-item:before,
+.editor-nested-list-item:after {
+  display: none;
 }
 
 /* ---------- Quote ----------  */

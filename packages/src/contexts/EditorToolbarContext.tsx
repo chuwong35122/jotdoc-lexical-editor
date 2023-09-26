@@ -201,6 +201,16 @@ const EditorToolbarContextProvider = ({ ...props }) => {
     );
   }, [editor, updateToolbar]);
 
+  useEffect(() => {
+    return mergeRegister(
+      editor.registerUpdateListener(({ editorState }) => {
+        editorState.read(() => {
+          updateToolbar();
+        });
+      }),
+    );
+  }, [editor, updateToolbar]);
+
   const values: EditorToolbarContextStruct = {
     blockType,
     setBlockType,

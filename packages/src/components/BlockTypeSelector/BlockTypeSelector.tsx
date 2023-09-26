@@ -56,10 +56,7 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
   }, []);
 
   useEffect(() => {
-    console.log(blockType)
-    console.log(options)
     const index = options.findIndex((option) => option.value === blockType);
-    console.log(index)
     if (index !== -1) {
       setActiveIndex(index)
     }

@@ -12,21 +12,19 @@ export const MainEditorTheme = {
     h6: "editor-heading-h6",
   },
   list: {
-    nested: {
-      listitem: "editor-nested-listitem",
-    },
-    ol: "editor-list-ol",
+    listitem: "editor-list-item",
     ul: "editor-list-ul",
-    listitem: "editor-listItem",
     listitemChecked: "editor-list-item-checked",
     listitemUnchecked: "editor-list-item-unchecked",
+    nested: {
+      listitem: "editor-nested-list-item",
+    },
     olDepth: [
-      // TODO: implement this
-      // 'ol1',-
-      // 'ol2',-
-      // 'ol3',-
-      // 'ol4',-
-      // 'ol5',-
+      "editor-list-ol-depth-1",
+      "editor-list-ol-depth-2",
+      "editor-list-ol-depth-3",
+      "editor-list-ol-depth-4",
+      "editor-list-ol-depth-5",
     ],
   },
   hashtag: "editor-hashtag",

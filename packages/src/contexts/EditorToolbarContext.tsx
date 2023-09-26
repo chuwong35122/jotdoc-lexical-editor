@@ -50,7 +50,7 @@ interface EditorToolbarContextStruct {
   setFontFamily: Dispatch<SetStateAction<string>>;
   highlightedColor: string;
   setHighlightedColor: Dispatch<SetStateAction<string>>;
-  textAlign: string | TextAlignType
+  textAlign: string | TextAlignType;
   activeComponent: number | null;
   setActiveComponent: Dispatch<SetStateAction<number | null>>;
 }
@@ -60,7 +60,7 @@ export const EditorToolbarContext = createContext(
 );
 
 const EditorToolbarContextProvider = ({ ...props }) => {
-  const [blockType, setBlockType] = useState<BlockType>("Text");
+  const [blockType, setBlockType] = useState<BlockType>("paragraph");
   const [editor] = useLexicalComposerContext();
   const [selectedElementKey, setSelectedElementKey] = useState<any>();
 
@@ -112,11 +112,10 @@ const EditorToolbarContextProvider = ({ ...props }) => {
         } else {
           const type = element.getType();
           if (type === "heading") {
-          // TODO: use matching type as 'BlockTypes' object
             const tag = element.getTag(); // check for heading node
-            setBlockType(tag);
+            setBlockType(tag)
           } else if (type === "paragraph") {
-            setBlockType(type as BlockType);
+            setBlockType('paragraph');
           }
         }
       }

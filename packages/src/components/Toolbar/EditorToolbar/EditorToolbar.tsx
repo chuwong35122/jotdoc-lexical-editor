@@ -11,7 +11,7 @@ import ColorPallette from "../../ColorPallette/ColorPallette";
 import { RGBColor } from "react-color";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isRangeSelection, FORMAT_ELEMENT_COMMAND, FORMAT_TEXT_COMMAND, REDO_COMMAND, UNDO_COMMAND } from "lexical";
-import { $patchStyleText } from '@lexical/selection';
+import { $patchStyleText } from '@lexical/selection'
 
 interface EditorToolbarProps { }
 

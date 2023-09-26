@@ -1,0 +1,30 @@
+.dialog {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  min-width: 560px;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.url-input {
+  width: 560px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.preview-image-container {
+  width: 100%;
+  min-height: 350px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+}
+
+.preview-image {
+  object-fit: cover;
+  width: 100%;
+}

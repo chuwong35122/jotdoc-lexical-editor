@@ -35,7 +35,7 @@ interface BlockTypeSelectorProps {
 }
 
 function BlockTypeSelector(props: BlockTypeSelectorProps) {
-  const { options, activeIndex } = props;
+  const { options, activeIndex, setActiveIndex } = props;
   const { blockType, setBlockType } = useContext(EditorToolbarContext);
   const [editor] = useLexicalComposerContext();
 
@@ -54,6 +54,16 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(blockType)
+    console.log(options)
+    const index = options.findIndex((option) => option.value === blockType);
+    console.log(index)
+    if (index !== -1) {
+      setActiveIndex(index)
+    }
+  }, [blockType])
 
   function toggleOpen() {
     props.setIsOpen((prev) => !prev);

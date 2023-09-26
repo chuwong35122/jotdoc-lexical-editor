@@ -1,8 +1,8 @@
 export const BlockTypes = {
-  paragraph: "text",
-  h1: "heading1",
-  h2: "heading2",
-  h3: "heading3",
+  paragraph: "paragraph",
+  h1: "h1",
+  h2: "h2",
+  h3: "h3",
   ul: "ul", // unordered list
   ol: "ol", // ordered list
   cl: "cl", // checklist

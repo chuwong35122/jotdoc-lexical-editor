@@ -59,24 +59,6 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
     props.setIsOpen((prev) => !prev);
   }
 
-  function onClickItem(target: number) {
-    if (target === activeIndex) return;
-
-    props.setActiveIndex(target);
-    const option = options[target].label;
-    if (option === "paragraph") {
-      transformParagraphNode(editor, blockType);
-    } else if (option === "h1") {
-      transformH1Node(editor, blockType);
-    } else if (option === "h2") {
-      transformH2Node(editor, blockType);
-    } else if (option === "h3") {
-      transformH3Node(editor, blockType);
-    }
-
-    props.setIsOpen(false);
-  }
-
   function getActiveItemBgColor(color?: Theme) {
     return THEME_COLORS[color ?? "primary"].option;
   }
@@ -132,13 +114,13 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
           <BlockTypeSelectorItem
             index={4}
             option={SELECT_ICON_OPTIONS[4]}
-            onClick={() => transformBulletListNode(editor, blockType)}
+            onClick={() => transformOrderedListNode(editor, blockType)}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem
             index={5}
             option={SELECT_ICON_OPTIONS[5]}
-            onClick={() => transformOrderedListNode(editor, blockType)}
+            onClick={() => transformBulletListNode(editor, blockType)}
             length={SELECT_ICON_OPTIONS.length}
           />
           <BlockTypeSelectorItem

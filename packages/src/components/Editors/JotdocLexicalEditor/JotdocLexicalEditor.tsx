@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EditorState } from "lexical";
+import { EditorState, ParagraphNode } from "lexical";
 import {
   LexicalComposer,
   InitialConfigType,
@@ -14,6 +14,12 @@ import MainButton from "../../Buttons/MainButton/MainButton";
 import EditorToolbarContextProvider from "../../../contexts/EditorToolbarContext";
 import EditorToolbar from "../../Toolbar/EditorToolbar/EditorToolbar";
 import { MainEditorTheme } from "../../../constants/editor";
+import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { TableNode, TableRowNode, TableCellNode } from '@lexical/table';
+import { ListNode, ListItemNode } from '@lexical/list';
+import { LinkNode, AutoLinkNode } from '@lexical/link';
+import { CodeNode, CodeHighlightNode } from '@lexical/code';
+import { HashtagNode } from '@lexical/hashtag';
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -31,6 +37,21 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
       console.log(editorState);
     },
     editorState: editorState,
+    nodes: [
+      ParagraphNode,
+      HeadingNode,
+      ListNode,
+      ListItemNode,
+      LinkNode,
+      AutoLinkNode,
+      QuoteNode,
+      CodeNode,
+      CodeHighlightNode,
+      HashtagNode,
+      TableNode,
+      TableRowNode,
+      TableCellNode,
+    ]
   };
 
   function handleChange(state: EditorState) {

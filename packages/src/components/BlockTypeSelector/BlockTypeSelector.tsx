@@ -1,9 +1,29 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { SelectIconOption } from "../../types/select.interface";
 import { SELECT_ICON_OPTIONS } from "../../constants/selector";
 import "./BlockTypeSelector.css";
 import { Theme } from "../../types/theme.interface";
 import { THEME_COLORS } from "../../constants/themes";
+import {
+  transformBulletListNode,
+  transformCheckListNode,
+  transformCodeNode,
+  transformH1Node,
+  transformH2Node,
+  transformH3Node,
+  transformOrderedListNode,
+  transformParagraphNode,
+  transformQuoteNode,
+} from "../../utils/block";
+import { EditorToolbarContext } from "../../contexts/EditorToolbarContext";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import BlockTypeSelectorItem from "./BlockTypeSelectorItem";
 
 interface BlockTypeSelectorProps {
   options: SelectIconOption[];
@@ -16,6 +36,9 @@ interface BlockTypeSelectorProps {
 
 function BlockTypeSelector(props: BlockTypeSelectorProps) {
   const { options, activeIndex } = props;
+  const { blockType, setBlockType } = useContext(EditorToolbarContext);
+  const [editor] = useLexicalComposerContext();
+
   const selector = useRef<HTMLDivElement>(null);
 
   function handleClickOutside(event: MouseEvent) {
@@ -29,7 +52,7 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-    }
+    };
   }, []);
 
   function toggleOpen() {
@@ -37,14 +60,25 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
   }
 
   function onClickItem(target: number) {
-    if (target === activeIndex) return
+    if (target === activeIndex) return;
 
-    props.setActiveIndex(target)
+    props.setActiveIndex(target);
+    const option = options[target].label;
+    if (option === "paragraph") {
+      transformParagraphNode(editor, blockType);
+    } else if (option === "h1") {
+      transformH1Node(editor, blockType);
+    } else if (option === "h2") {
+      transformH2Node(editor, blockType);
+    } else if (option === "h3") {
+      transformH3Node(editor, blockType);
+    }
+
     props.setIsOpen(false);
   }
 
   function getActiveItemBgColor(color?: Theme) {
-    return THEME_COLORS[color ?? 'primary'].option
+    return THEME_COLORS[color ?? "primary"].option;
   }
 
   return (
@@ -71,32 +105,60 @@ function BlockTypeSelector(props: BlockTypeSelectorProps) {
       )}
       {props.isOpen && (
         <div className="select-option-wrapper">
-          {SELECT_ICON_OPTIONS.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => onClickItem(index)}
-              className={["select-option"].join(" ")}
-              style={{
-                borderBottom:
-                  index === SELECT_ICON_OPTIONS.length - 1
-                    ? "none"
-                    : "1px solid #e0e0e0",
-                borderRadius:
-                  index === SELECT_ICON_OPTIONS.length - 1
-                    ? "0 0 0.5rem 0.5rem"
-                    : "none"
-              }}
-            >
-              <img
-                src={option.icon}
-                width={24}
-                height={24}
-                alt={option.label}
-                className="option-icon"
-              />
-              <p>{option.label}</p>
-            </button>
-          ))}
+          <BlockTypeSelectorItem
+            index={0}
+            option={SELECT_ICON_OPTIONS[0]}
+            onClick={() => transformParagraphNode(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={1}
+            option={SELECT_ICON_OPTIONS[1]}
+            onClick={() => transformH1Node(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={2}
+            option={SELECT_ICON_OPTIONS[2]}
+            onClick={() => transformH2Node(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={3}
+            option={SELECT_ICON_OPTIONS[3]}
+            onClick={() => transformH3Node(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={4}
+            option={SELECT_ICON_OPTIONS[4]}
+            onClick={() => transformBulletListNode(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={5}
+            option={SELECT_ICON_OPTIONS[5]}
+            onClick={() => transformOrderedListNode(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={6}
+            option={SELECT_ICON_OPTIONS[6]}
+            onClick={() => transformCheckListNode(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={7}
+            option={SELECT_ICON_OPTIONS[7]}
+            onClick={() => transformQuoteNode(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
+          <BlockTypeSelectorItem
+            index={8}
+            option={SELECT_ICON_OPTIONS[8]}
+            onClick={() => transformCodeNode(editor, blockType)}
+            length={SELECT_ICON_OPTIONS.length}
+          />
         </div>
       )}
     </div>

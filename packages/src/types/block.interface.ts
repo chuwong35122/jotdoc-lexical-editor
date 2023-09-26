@@ -1,15 +1,15 @@
 import { BlockTypes } from "../constants/block";
 
 export enum BlockTypeEnum {
-  Text = "text",
-  Heading1 = "heading1",
-  Heading2 = "heading2",
-  Heading3 = "heading3",
-  UL = "ul", // unordered list
-  OL = "ol", // ordered list
-  CL = "cl", // checklist
-  Quote = "quote",
-  Code = "code",
+  paragraph = "text",
+  h1 = "heading1",
+  h2 = "heading2",
+  h3 = "heading3",
+  ul = "ul", // unordered list
+  ol = "ol", // ordered list
+  cl = "cl", // checklist
+  quote = "quote",
+  code = "code",
 }
 
 export type BlockType = keyof typeof BlockTypes;

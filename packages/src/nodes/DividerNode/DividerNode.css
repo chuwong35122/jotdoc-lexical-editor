@@ -1,0 +1,18 @@
+[type='divider'] {
+  position: relative;
+  display: block;
+  overflow: unset;
+  margin: auto;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  border: none;
+  border-bottom: 1px solid var(--editor-color-secondary, rgba(0,0,0,0.1));
+}
+
+[type='divider']::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+}

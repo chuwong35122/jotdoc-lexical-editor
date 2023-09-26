@@ -23,6 +23,7 @@ import { HashtagNode } from '@lexical/hashtag';
 
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
@@ -79,6 +80,9 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
           placeholder={<div className="editable-placeholder"></div>}
           ErrorBoundary={LexicalErrorBoundary}
         />
+
+        {/* Helper Plugins */}
+        <AutoFocusPlugin />
         <HistoryPlugin />
         <OnChangePlugin onChange={handleChange} />
 

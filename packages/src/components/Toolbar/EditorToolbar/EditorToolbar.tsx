@@ -6,12 +6,23 @@ import BlockTypeSelector from "../../BlockTypeSelector/BlockTypeSelector";
 import { SELECT_ICON_OPTIONS } from "../../../constants/selector";
 import ClickableButton from "../../Buttons/ClickableButton/ClickableButton";
 import FontSizeSelector from "../../FontSizeSelector/FontSizeSelector";
-import { FONT_SIZE_OPTIONS } from "../../../constants/themes";
+import {
+  FONT_FAMILY_OPTIONS,
+  FONT_SIZE_OPTIONS,
+} from "../../../constants/themes";
 import ColorPallette from "../../ColorPallette/ColorPallette";
 import { RGBColor } from "react-color";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getSelection, $isRangeSelection, FORMAT_ELEMENT_COMMAND, FORMAT_TEXT_COMMAND, REDO_COMMAND, UNDO_COMMAND } from "lexical";
-import { $patchStyleText } from '@lexical/selection'
+import {
+  $getSelection,
+  $isRangeSelection,
+  FORMAT_ELEMENT_COMMAND,
+  FORMAT_TEXT_COMMAND,
+  REDO_COMMAND,
+  UNDO_COMMAND,
+} from "lexical";
+import { $patchStyleText } from "@lexical/selection";
+import FontFamilySelector from "../../FontFamilySelector/FontFamilySelector";
 
 interface EditorToolbarProps { }
 
@@ -21,6 +32,7 @@ function EditorToolbar(props: EditorToolbarProps) {
 
   const [blockSelectorOpen, setBlockSelectorOpen] = useState(false);
   const [fontSizeSelectorOpen, setFontSizeSelectorOpen] = useState(false);
+  const [fontFamilySelectorOpen, setFontFamilySelectorOpen] = useState(false);
   const [highlighterOpen, setHighlighterOpen] = useState(false);
   const [colorOpen, setColorOpen] = useState(false);
 
@@ -29,7 +41,7 @@ function EditorToolbar(props: EditorToolbarProps) {
   function handleSetHighlighterColor(color: RGBColor) {
     color.a = 0.5;
     const _color = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-    selectHighlighterColor(_color)
+    selectHighlighterColor(_color);
     context.setHighlightedColor(_color);
   }
 
@@ -38,7 +50,6 @@ function EditorToolbar(props: EditorToolbarProps) {
     selectColor(_color);
     context.setFontColor(_color);
   }
-
 
   function selectColor(target: string) {
     editor.update(() => {
@@ -49,12 +60,11 @@ function EditorToolbar(props: EditorToolbarProps) {
     });
   }
 
-
   function selectHighlighterColor(target: string) {
     editor.update(() => {
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
-        $patchStyleText(selection, { 'background-color': target });
+        $patchStyleText(selection, { "background-color": target });
       }
     });
   }
@@ -85,6 +95,11 @@ function EditorToolbar(props: EditorToolbarProps) {
         color={"primary"}
       />
       <div className="v-divider" />
+      <FontFamilySelector
+        options={FONT_FAMILY_OPTIONS}
+        isOpen={fontFamilySelectorOpen}
+        setIsOpen={setFontFamilySelectorOpen}
+      />
       <FontSizeSelector
         options={FONT_SIZE_OPTIONS}
         isOpen={fontSizeSelectorOpen}
@@ -93,25 +108,27 @@ function EditorToolbar(props: EditorToolbarProps) {
       <IconToggle
         iconSrc={"/icons/bold.svg"}
         state={context.isBold}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
+        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
         name="bold"
       />
       <IconToggle
         iconSrc={"/icons/italic.svg"}
         state={context.isItalic}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
+        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
         name="italic"
       />
       <IconToggle
         iconSrc={"/icons/underline.svg"}
         state={context.isUnderline}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
+        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")}
         name="underline"
       />
       <IconToggle
         iconSrc={"/icons/strikethrough.svg"}
         state={context.isStrikethrough}
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
+        onClick={() =>
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
+        }
         name="strikethrough"
       />
       <ColorPallette
@@ -135,25 +152,27 @@ function EditorToolbar(props: EditorToolbarProps) {
         name="align-left"
         state={context.textAlign === "left"}
         iconSrc="/icons/align-left.svg"
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
       />
       <ClickableButton
         name="align-center"
-        state={context.textAlign === 'center'}
+        state={context.textAlign === "center"}
         iconSrc="/icons/align-center.svg"
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")}
       />
       <ClickableButton
         name="align-right"
-        state={context.textAlign === 'end'}
+        state={context.textAlign === "end"}
         iconSrc="/icons/align-right.svg"
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'end')}
+        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "end")}
       />
       <ClickableButton
         name="align-justify"
-        state={context.textAlign === 'justify'}
+        state={context.textAlign === "justify"}
         iconSrc="/icons/align-justify.svg"
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
+        onClick={() =>
+          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
+        }
       />
     </div>
   );

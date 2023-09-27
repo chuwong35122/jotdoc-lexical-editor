@@ -32,6 +32,8 @@ import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin
 import ListMaxIndentLevelPlugin from "../../../plugins/ListMaxIndentPlugin";
 import CodeHighlightPlugin from "../../../plugins/CodeHighlightPlugin";
 import { HorizontalRulePlugin } from '@lexical/react/LexicalHorizontalRulePlugin';
+import { ImageNode } from "../../../nodes/ImageNode";
+import ImagesPlugin from "../../../plugins/ImagePlugin";
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -64,6 +66,7 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
       TableRowNode,
       TableCellNode,
       HorizontalRuleNode,
+      ImageNode,
     ]
   };
 
@@ -101,6 +104,9 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
 
         {/* Horizontal Rule */}
         <HorizontalRulePlugin />
+
+        {/* Image */}
+        <ImagesPlugin />
 
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>

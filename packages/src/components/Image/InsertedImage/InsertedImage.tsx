@@ -5,50 +5,31 @@ import type {
   NodeSelection,
   RangeSelection,
 } from 'lexical';
-import React from 'react';
-
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
-
+import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { LexicalNestedComposer } from '@lexical/react/LexicalNestedComposer';
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
 import { mergeRegister } from '@lexical/utils';
 import {
   $getNodeByKey,
   $getSelection,
   $isNodeSelection,
-  $setSelection,
   CLICK_COMMAND,
   COMMAND_PRIORITY_LOW,
   DRAGSTART_COMMAND,
   KEY_BACKSPACE_COMMAND,
   KEY_DELETE_COMMAND,
-  KEY_ENTER_COMMAND,
-  KEY_ESCAPE_COMMAND,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
-import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
-// import { $isImageNode } from '../../../nodes/ImageNode/ImageNode';
-// import ImageResizer from '../ImageResizer/ImageResizer';
-import './InsertedImage.css';
-import { HashtagPlugin } from '@lexical/react/LexicalHashtagPlugin';
-// import LinkDetectorPlugin from '../../../plugins/LinkDetectorPlugin';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { $isImageNode } from '../../../nodes/ImageNode';
 import ImageResizer from '../ImageResizer/ImageResizer';
 
 interface Props {
   altText: string;
-  caption: LexicalEditor;
   height: 'inherit' | number;
   maxWidth: number;
   nodeKey: NodeKey;
-  showCaption: boolean;
   src: string;
   width: 'inherit' | number;
-  captionsEnabled: boolean;
 }
 
 export default function InsertedImage({
@@ -58,9 +39,6 @@ export default function InsertedImage({
   width,
   height,
   maxWidth,
-  showCaption,
-  caption,
-  captionsEnabled,
 }: Props): JSX.Element {
   const imageRef = useRef<null | HTMLImageElement>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -86,56 +64,6 @@ export default function InsertedImage({
       return false;
     },
     [isSelected, nodeKey],
-  );
-
-  const onEnter = useCallback(
-    (event: KeyboardEvent) => {
-      const latestSelection = $getSelection();
-      const buttonElem = buttonRef.current;
-      if (
-        isSelected &&
-        $isNodeSelection(latestSelection) &&
-        latestSelection.getNodes().length === 1
-      ) {
-        if (showCaption) {
-          // Move focus into nested editor
-          $setSelection(null);
-          event.preventDefault();
-          caption.focus();
-          return true;
-        } else if (
-          buttonElem !== null &&
-          buttonElem !== document.activeElement
-        ) {
-          event.preventDefault();
-          buttonElem.focus();
-          return true;
-        }
-      }
-      return false;
-    },
-    [caption, isSelected, showCaption],
-  );
-
-  const onEscape = useCallback(
-    (event: KeyboardEvent) => {
-      if (
-        activeEditorRef.current === caption ||
-        buttonRef.current === event.target
-      ) {
-        $setSelection(null);
-        editor.update(() => {
-          setSelected(true);
-          const parentRootElement = editor.getRootElement();
-          if (parentRootElement !== null) {
-            parentRootElement.focus();
-          }
-        });
-        return true;
-      }
-      return false;
-    },
-    [caption, editor, setSelected],
   );
 
   useEffect(() => {
@@ -199,12 +127,6 @@ export default function InsertedImage({
         onDelete,
         COMMAND_PRIORITY_LOW,
       ),
-      editor.registerCommand(KEY_ENTER_COMMAND, onEnter, COMMAND_PRIORITY_LOW),
-      editor.registerCommand(
-        KEY_ESCAPE_COMMAND,
-        onEscape,
-        COMMAND_PRIORITY_LOW,
-      ),
     );
     return () => {
       isMounted = false;
@@ -217,19 +139,9 @@ export default function InsertedImage({
     isSelected,
     nodeKey,
     onDelete,
-    onEnter,
-    onEscape,
     setSelected,
   ]);
 
-  const setShowCaption = () => {
-    editor.update(() => {
-      const node = $getNodeByKey(nodeKey);
-      if ($isImageNode(node)) {
-        node.setShowCaption(true);
-      }
-    });
-  };
 
   const onResizeEnd = (
     nextWidth: 'inherit' | number,
@@ -261,15 +173,11 @@ export default function InsertedImage({
       >
         <Suspense fallback={null}>
           <ImageResizer
-            showCaption={showCaption}
-            setShowCaption={setShowCaption}
             editor={editor}
-            buttonRef={buttonRef}
             imageRef={imageRef}
             maxWidth={maxWidth}
             onResizeStart={onResizeStart}
             onResizeEnd={onResizeEnd}
-            captionsEnabled={captionsEnabled}
           >
             <div draggable={draggable}>
               <img

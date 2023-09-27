@@ -1,6 +1,6 @@
-import type { LexicalEditor } from 'lexical';
-import React, { ReactNode, useRef, useState } from 'react';
-import './ImageResizer.css';
+import type { LexicalEditor } from "lexical";
+import React, { ReactNode, useRef, useState } from "react";
+import "./ImageResizer.css";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
@@ -15,20 +15,16 @@ const Direction = {
 
 interface Props {
   editor: LexicalEditor;
-  buttonRef: { current: null | HTMLButtonElement };
   imageRef: { current: null | HTMLElement };
   maxWidth?: number;
-  onResizeEnd: (width: 'inherit' | number, height: 'inherit' | number) => void;
+  onResizeEnd: (width: "inherit" | number, height: "inherit" | number) => void;
   onResizeStart: () => void;
-  setShowCaption: (show: boolean) => void;
-  showCaption: boolean;
-  captionsEnabled: boolean;
   children: ReactNode;
 }
 
 interface Positioning {
-  currentHeight: 'inherit' | number;
-  currentWidth: 'inherit' | number;
+  currentHeight: "inherit" | number;
+  currentWidth: "inherit" | number;
   direction: number;
   isResizing: boolean;
   ratio: number;
@@ -41,22 +37,17 @@ interface Positioning {
 export default function ImageResizer({
   onResizeStart,
   onResizeEnd,
-  buttonRef,
   imageRef,
   maxWidth,
   editor,
-  showCaption,
-  setShowCaption,
-  captionsEnabled,
   children,
 }: Props): JSX.Element {
-
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   const controlWrapperRef = useRef<HTMLDivElement>(null);
   const userSelect = useRef({
-    priority: '',
-    value: 'default',
+    priority: "",
+    value: "default",
   });
   const positioningRef = useRef<Positioning>({
     currentHeight: 0,
@@ -87,14 +78,14 @@ export default function ImageResizer({
 
   const setEndCursor = () => {
     if (editorRootElement !== null) {
-      editorRootElement.style.setProperty('cursor', 'text');
+      editorRootElement.style.setProperty("cursor", "text");
     }
     if (document.body !== null) {
-      document.body.style.setProperty('cursor', 'default');
+      document.body.style.setProperty("cursor", "default");
       document.body.style.setProperty(
-        '-webkit-user-select',
+        "-webkit-user-select",
         userSelect.current.value,
-        userSelect.current.priority,
+        userSelect.current.priority
       );
     }
   };
@@ -102,7 +93,7 @@ export default function ImageResizer({
   // Set cursor to resize mode when mouse down
   const handlePointerDown = (
     event: React.PointerEvent<HTMLDivElement>,
-    direction: number,
+    direction: number
   ) => {
     if (!editor.isEditable()) {
       return;
@@ -126,12 +117,12 @@ export default function ImageResizer({
       positioning.direction = direction;
       onResizeStart();
 
-      controlWrapper.classList.add('image-control-wrapper--resizing');
+      controlWrapper.classList.add("image-control-wrapper--resizing");
       image.style.height = `${height}px`;
       image.style.width = `${width}px`;
 
-      document.addEventListener('pointermove', handlePointerMove);
-      document.addEventListener('pointerup', handlePointerUp);
+      document.addEventListener("pointermove", handlePointerMove);
+      document.addEventListener("pointerup", handlePointerUp);
     }
   };
 
@@ -154,7 +145,7 @@ export default function ImageResizer({
         const width = clamp(
           positioning.startWidth + diff,
           minWidth,
-          maxWidthContainer,
+          maxWidthContainer
         );
 
         const height = width / positioning.ratio;
@@ -169,7 +160,7 @@ export default function ImageResizer({
         const height = clamp(
           positioning.startHeight + diff,
           minHeight,
-          maxHeightContainer,
+          maxHeightContainer
         );
 
         image.style.height = `${height}px`;
@@ -181,7 +172,7 @@ export default function ImageResizer({
         const width = clamp(
           positioning.startWidth + diff,
           minWidth,
-          maxWidthContainer,
+          maxWidthContainer
         );
 
         image.style.width = `${width}px`;
@@ -205,51 +196,52 @@ export default function ImageResizer({
       positioning.currentHeight = 0;
       positioning.isResizing = false;
 
-      controlWrapper.classList.remove('image-control-wrapper--resizing');
+      controlWrapper.classList.remove("image-control-wrapper--resizing");
 
       setEndCursor();
       onResizeEnd(width, height);
 
-      document.removeEventListener('pointermove', handlePointerMove);
-      document.removeEventListener('pointerup', handlePointerUp);
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerup", handlePointerUp);
     }
   };
 
   return (
-    <div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div ref={controlWrapperRef}>
-        {!showCaption && captionsEnabled && (
-          <button
-            className="image-caption-button"
-            ref={buttonRef}
-            onClick={() => {
-              setShowCaption(!showCaption);
-            }}
-          >
-            Add Caption
-          </button>
-        )}
         <div>
           <div
             className="image-resizer image-resizer-e"
-            style={{ position: 'absolute', left: 10, top: '30%', opacity: isHovered ? 1 : 0 }}
-            onPointerDown={event => {
+            style={{
+              position: "absolute",
+              left: 10,
+              top: "30%",
+              opacity: isHovered ? 1 : 0,
+              zIndex: 100
+            }}
+            onPointerDown={(event) => {
               handlePointerDown(event, Direction.north | Direction.west);
             }}
           />
           <div
             className="image-resizer image-resizer-w"
-            style={{ position: 'absolute', right: 10, top: '30%', opacity: isHovered ? 1 : 0 }}
-            onPointerDown={event => {
+            style={{
+              position: "absolute",
+              right: 10,
+              top: "30%",
+              opacity: isHovered ? 1 : 0,
+              zIndex: 100
+            }}
+            onPointerDown={(event) => {
               handlePointerDown(event, Direction.south | Direction.east);
             }}
           />
         </div>
-
       </div>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 }

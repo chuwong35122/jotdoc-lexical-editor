@@ -10,6 +10,7 @@ import { MainButton } from "../Buttons";
 import useDebounce from "../../hook/useDebounce";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { INSERT_IMAGE_COMMAND } from "../../plugins/ImagePlugin";
+import { ImageUploadedPayload } from "../../nodes/ImageNode";
 
 interface ImageUploadDialogProps {
   isOpen: boolean;
@@ -22,6 +23,8 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const [url, setUrl] = useState("");
+  const [altText, setAltText] = useState("")
+
   const debounced = useDebounce<string>(url, 250);
 
   useEffect(() => {
@@ -33,16 +36,13 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
   }, [isOpen]);
 
   function handleSubmit() {
-    const payload = {
-      altText: 'This is an ALT',
-      caption: undefined,
+    const payload: ImageUploadedPayload = {
+      altText: altText,
+      maxWidth: 800,
+      width: 800,
       height: undefined,
       key: undefined,
-      maxWidth: 800,
-      showCaption: undefined,
       src: debounced,
-      width: 800,
-      captionEnabled: true,
     };
 
     editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
@@ -62,8 +62,16 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
         <h2>Upload Image URL</h2>
         <input
           type="url"
+          placeholder="Enter Image URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          className="url-input"
+        />
+        <input
+          type="text"
+          placeholder="Enter Image Alt Text"
+          value={altText}
+          onChange={(e) => setAltText(e.target.value)}
           className="url-input"
         />
         {debounced && (

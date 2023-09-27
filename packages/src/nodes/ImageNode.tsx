@@ -15,16 +15,13 @@ import { $applyNodeReplacement, createEditor, DecoratorNode } from 'lexical';
 import React, { Suspense } from 'react';
 import InsertedImage from '../components/Image/InsertedImage/InsertedImage';
 
-export interface ImagePayload {
+export interface ImageUploadedPayload {
   altText: string;
-  caption?: LexicalEditor;
-  height?: number;
-  key?: NodeKey;
   maxWidth?: number;
-  showCaption?: boolean;
+  width: number;
+  height?: number;
+  key?: number;
   src: string;
-  width?: number;
-  captionsEnabled?: boolean;
 }
 
 function convertImageElement(domNode: Node): null | DOMConversionOutput {
@@ -85,9 +82,8 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
       altText,
       height,
       maxWidth,
-      showCaption,
       src,
-      width,
+      width: width ?? 200,
     });
     const nestedEditor = node.__caption;
     const editorState = nestedEditor.parseEditorState(caption.editorState);
@@ -212,24 +208,17 @@ export function $createImageNode({
   altText,
   height,
   maxWidth = 500,
-  captionsEnabled,
   src,
   width,
-  showCaption,
-  caption,
   key,
-}: ImagePayload): ImageNode {
+}: ImageUploadedPayload): ImageNode {
   return $applyNodeReplacement(
     new ImageNode(
       src,
       altText,
       maxWidth,
       width,
-      height,
-      showCaption,
-      caption,
-      captionsEnabled,
-      key,
+      height
     ),
   );
 }

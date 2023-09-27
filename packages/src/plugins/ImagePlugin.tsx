@@ -21,10 +21,10 @@ import {
   $createImageNode,
   $isImageNode,
   ImageNode,
-  ImagePayload,
+  ImageUploadedPayload,
 } from '../nodes/ImageNode';
 
-export type InsertImagePayload = Readonly<ImagePayload>;
+export type InsertImagePayload = Readonly<ImageUploadedPayload>;
 
 export const INSERT_IMAGE_COMMAND: LexicalCommand<InsertImagePayload> =
   createCommand('INSERT_IMAGE_COMMAND');

@@ -196,8 +196,6 @@ export default function ImageResizer({
       positioning.currentHeight = 0;
       positioning.isResizing = false;
 
-      controlWrapper.classList.remove("image-control-wrapper--resizing");
-
       setEndCursor();
       onResizeEnd(width, height);
 

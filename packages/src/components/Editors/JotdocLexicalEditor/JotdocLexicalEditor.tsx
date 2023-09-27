@@ -14,26 +14,28 @@ import EditorToolbarContextProvider from "../../../contexts/EditorToolbarContext
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 
-import { HeadingNode, QuoteNode } from '@lexical/rich-text';
-import { TableNode, TableRowNode, TableCellNode } from '@lexical/table';
-import { ListNode, ListItemNode } from '@lexical/list';
-import { LinkNode, AutoLinkNode } from '@lexical/link';
-import { CodeNode, CodeHighlightNode } from '@lexical/code';
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { TableNode, TableRowNode, TableCellNode } from "@lexical/table";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { LinkNode, AutoLinkNode } from "@lexical/link";
+import { CodeNode, CodeHighlightNode } from "@lexical/code";
 import { HorizontalRuleNode } from "@lexical/react/LexicalHorizontalRuleNode";
-import { HashtagNode } from '@lexical/hashtag';
+import { HashtagNode } from "@lexical/hashtag";
 
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { ListPlugin } from '@lexical/react/LexicalListPlugin';
-import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
-import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
+import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import ListMaxIndentLevelPlugin from "../../../plugins/ListMaxIndentPlugin";
 import CodeHighlightPlugin from "../../../plugins/CodeHighlightPlugin";
-import { HorizontalRulePlugin } from '@lexical/react/LexicalHorizontalRulePlugin';
+import { HorizontalRulePlugin } from "@lexical/react/LexicalHorizontalRulePlugin";
 import { ImageNode } from "../../../nodes/ImageNode";
 import ImagesPlugin from "../../../plugins/ImagePlugin";
+import LinkDetectorPlugin from "../../../plugins/LinkDetectorPlugin";
+import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugin';
 
 interface JotdocLexicalEditorProps {
   namespace: string;
@@ -67,7 +69,7 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
       TableCellNode,
       HorizontalRuleNode,
       ImageNode,
-    ]
+    ],
   };
 
   function handleChange(state: EditorState) {
@@ -107,6 +109,10 @@ function JotdocLexicalEditor(props: JotdocLexicalEditorProps) {
 
         {/* Image */}
         <ImagesPlugin />
+
+        {/* Link */}
+        <LinkDetectorPlugin />
+        <LexicalClickableLinkPlugin />
 
         <MainButton onClick={onSave}>Save</MainButton>
       </EditorToolbarContextProvider>

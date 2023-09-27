@@ -1,8 +1,6 @@
 import React, { Dispatch, SetStateAction, useCallback, useContext, useEffect, useRef } from "react";
-import { SELECT_ICON_OPTIONS } from "../../constants/selector";
 import "./FontSizeSelector.css";
 import { Theme } from "../../types/theme.interface";
-import { THEME_COLORS } from "../../constants/themes";
 import { EditorToolbarContext } from "../../contexts/EditorToolbarContext";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isRangeSelection } from "lexical";
@@ -16,15 +14,15 @@ interface FontSizeSelectorProps {
 }
 
 function FontSizeSelector(props: FontSizeSelectorProps) {
-  const { options, isOpen, setIsOpen, color } = props;
-  const { fontSize, setFontSize } = useContext(EditorToolbarContext);
+  const { options, isOpen, setIsOpen } = props;
+  const { fontSize } = useContext(EditorToolbarContext);
 
   const [editor] = useLexicalComposerContext()
   const selector = useRef<HTMLDivElement>(null);
 
   function handleClickOutside(event: MouseEvent) {
     if (!selector.current?.contains(event.target as Node)) {
-      props.setIsOpen(false);
+      setIsOpen(false);
     }
   }
 
@@ -37,11 +35,11 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
   }, []);
 
   function toggleOpen() {
-    props.setIsOpen((prev) => !prev);
+    setIsOpen((prev) => !prev);
   }
 
   function onClickItem(option: string) {
-    props.setIsOpen(false);
+    setIsOpen(false);
     handleSelectFontSize(option)
   }
 
@@ -66,7 +64,7 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
         <p>{fontSize}</p>
         <img
           src={
-            props.isOpen ? "/icons/chevron-up.svg" : "/icons/chevron-down.svg"
+            isOpen ? "/icons/chevron-up.svg" : "/icons/chevron-down.svg"
           }
           width={24}
           height={24}
@@ -74,7 +72,7 @@ function FontSizeSelector(props: FontSizeSelectorProps) {
           className="chevron"
         />
       </button>
-      {props.isOpen && (
+      {isOpen && (
         <div className="select-option-wrapper">
           {options.map((option, index) => (
             <button

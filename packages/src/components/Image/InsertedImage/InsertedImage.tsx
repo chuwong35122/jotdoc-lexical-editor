@@ -4,11 +4,17 @@ import type {
   NodeKey,
   NodeSelection,
   RangeSelection,
-} from 'lexical';
-import React, { Suspense, useCallback, useEffect, useRef, useState } from 'react';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
-import { mergeRegister } from '@lexical/utils';
+} from "lexical";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useLexicalNodeSelection } from "@lexical/react/useLexicalNodeSelection";
+import { mergeRegister } from "@lexical/utils";
 import {
   $getNodeByKey,
   $getSelection,
@@ -19,17 +25,18 @@ import {
   KEY_BACKSPACE_COMMAND,
   KEY_DELETE_COMMAND,
   SELECTION_CHANGE_COMMAND,
-} from 'lexical';
-import { $isImageNode } from '../../../nodes/ImageNode';
-import ImageResizer from '../ImageResizer/ImageResizer';
+} from "lexical";
+import { $isImageNode } from "../../../nodes/ImageNode";
+import ImageResizer from "../ImageResizer/ImageResizer";
+import "./InsertedImage.css";
 
 interface Props {
   altText: string;
-  height: 'inherit' | number;
+  height: "inherit" | number;
   maxWidth: number;
   nodeKey: NodeKey;
   src: string;
-  width: 'inherit' | number;
+  width: "inherit" | number;
 }
 
 export default function InsertedImage({
@@ -41,7 +48,6 @@ export default function InsertedImage({
   maxWidth,
 }: Props): JSX.Element {
   const imageRef = useRef<null | HTMLImageElement>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [isSelected, setSelected, clearSelection] =
     useLexicalNodeSelection(nodeKey);
   const [isResizing, setIsResizing] = useState<boolean>(false);
@@ -63,7 +69,7 @@ export default function InsertedImage({
       }
       return false;
     },
-    [isSelected, nodeKey],
+    [isSelected, nodeKey]
   );
 
   useEffect(() => {
@@ -80,11 +86,11 @@ export default function InsertedImage({
           activeEditorRef.current = activeEditor;
           return false;
         },
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand<MouseEvent>(
         CLICK_COMMAND,
-        payload => {
+        (payload) => {
           const event = payload;
 
           if (isResizing) {
@@ -102,31 +108,29 @@ export default function InsertedImage({
 
           return false;
         },
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand(
         DRAGSTART_COMMAND,
-        event => {
+        (event) => {
           if (event.target === imageRef.current) {
-            // TODO This is just a temporary workaround for FF to behave like other browsers.
-            // Ideally, this handles drag & drop too (and all browsers).
             event.preventDefault();
             return true;
           }
           return false;
         },
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand(
         KEY_DELETE_COMMAND,
         onDelete,
-        COMMAND_PRIORITY_LOW,
+        COMMAND_PRIORITY_LOW
       ),
       editor.registerCommand(
         KEY_BACKSPACE_COMMAND,
         onDelete,
-        COMMAND_PRIORITY_LOW,
-      ),
+        COMMAND_PRIORITY_LOW
+      )
     );
     return () => {
       isMounted = false;
@@ -142,10 +146,9 @@ export default function InsertedImage({
     setSelected,
   ]);
 
-
   const onResizeEnd = (
-    nextWidth: 'inherit' | number,
-    nextHeight: 'inherit' | number,
+    nextWidth: "inherit" | number,
+    nextHeight: "inherit" | number
   ) => {
     // Delay hiding the resize bars for click case
     setTimeout(() => {
@@ -165,39 +168,29 @@ export default function InsertedImage({
   };
 
   const draggable = isSelected && $isNodeSelection(selection) && !isResizing;
-  const isFocused = isSelected || isResizing;
   return (
-    <>
-      <div
-        style={{ position: 'relative', width: 'max-content', margin: 'auto' }}
-      >
-        <Suspense fallback={null}>
-          <ImageResizer
-            editor={editor}
-            imageRef={imageRef}
-            maxWidth={maxWidth}
-            onResizeStart={onResizeStart}
-            onResizeEnd={onResizeEnd}
-          >
-            <div draggable={draggable}>
-              <img
-                src={src}
-                alt={altText}
-                ref={imageRef}
-                width={width}
-                height={height}
-                draggable="false"
-                className={`${isFocused
-                  ? `focused ${$isNodeSelection(selection) ? 'draggable' : ''
-                  }`
-                  : null
-                  }`}
-                style={{ maxWidth: maxWidth, margin: 'auto' }}
-              />
-            </div>
-          </ImageResizer>
-        </Suspense>
-      </div>
-    </>
+    <div style={{ position: "relative", width: "max-content", margin: "auto" }}>
+      <Suspense fallback={null}>
+        <ImageResizer
+          editor={editor}
+          imageRef={imageRef}
+          maxWidth={maxWidth}
+          onResizeStart={onResizeStart}
+          onResizeEnd={onResizeEnd}
+        >
+          <div draggable={draggable}>
+            <img
+              src={src}
+              alt={altText}
+              ref={imageRef}
+              width={width}
+              height={height}
+              draggable="false"
+              style={{ maxWidth: maxWidth, margin: "auto" }}
+            />
+          </div>
+        </ImageResizer>
+      </Suspense>
+    </div>
   );
 }

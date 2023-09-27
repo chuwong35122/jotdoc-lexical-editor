@@ -11,8 +11,14 @@ body {
     margin-bottom: 1rem;
 }
 
+/* Fix floating image border */
+p .editor-image {
+  border: 1px dashed transparent;
+}
+
 [contenteditable] {
   border: 1px solid #e0e0e0;
+  outline: 0px solid #e0e0e0;
 }
 
 [contenteditable]:focus {

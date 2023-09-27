@@ -70,7 +70,7 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
       height,
       maxWidth,
       src,
-      width: width ?? 200,
+      width: width ?? maxWidth
     });
 
     return node;
@@ -131,11 +131,6 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     writable.__height = height;
   }
 
-  setShowCaption(showCaption: boolean): void {
-    const writable = this.getWritable();
-    writable.__showCaption = showCaption;
-  }
-
   createDOM(config: EditorConfig): HTMLElement {
     const span = document.createElement("span");
     const theme = config.theme;
@@ -183,7 +178,7 @@ export function $createImageNode({
   key,
 }: ImageUploadedPayload): ImageNode {
   return $applyNodeReplacement(
-    new ImageNode(src, altText, maxWidth, width, height, key?.toString())
+    new ImageNode(src, altText, maxWidth, width, height)
   );
 }
 

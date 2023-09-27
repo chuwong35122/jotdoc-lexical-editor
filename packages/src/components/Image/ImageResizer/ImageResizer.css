@@ -1,51 +1,36 @@
-.dialog {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 1rem;
-  min-width: 560px;
-}
-
-.form-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.url-input {
-  width: 30rem;
-  padding: 0.5rem;
-}
-
-.preview-image {
-  min-height: 350px;
-  display: grid;
-  place-items: center;
-  object-fit: cover;
-  width: 100%;
-}
-
-.close-btn {
+.image-resizer {
+  display: block;
+  width: 7px;
+  height: 7px;
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: all 0.2s ease-in-out;
-  width: 2rem;
-  height: 2rem;
-  opacity: 0.5;
-  background: none;
+  background-color: rgb(60, 132, 244);
+  border: 1px solid #fff;
 }
 
-.close-btn:hover {
-  scale: 1.1;
-  opacity: 1;
+.image-resizer.image-resizer-e {
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid #fff;
+  border-radius: 20px;
+  margin: auto;
+  cursor: col-resize;
+  trasition: all 0.2s ease-in-out;
+}
+
+.image-resizer.image-resizer-w {
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid #fff;
+  border-radius: 20px;
+  margin: auto;
+  cursor: col-resize;
+  trasition: all 0.2s ease-in-out;
+}
+
+.image-resizer-e:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.image-resizer-w:hover {
+  background-color: rgba(0, 0, 0, 0.4);
 }

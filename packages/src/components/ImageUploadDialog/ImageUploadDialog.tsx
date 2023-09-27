@@ -38,35 +38,33 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
     setIsOpen(false);
   }
 
-
   return (
     <dialog ref={dialogRef} autoFocus onClose={onClose} className="dialog">
-      <form method="dialog" onSubmit={handleSubmit}>
+      <form method="dialog" onSubmit={handleSubmit} className="form-column">
+        <button onClick={onClose} className="close-btn">
+          <img src="/icons/x.svg" width="20" height="20" alt="close" />
+        </button>
         <h2>Upload Image URL</h2>
-        <div>
-          <input
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="url-input"
+        <input
+          type="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          className="url-input"
+        />
+        {debounced && (
+          <img
+            src={debounced}
+            alt="preview"
+            draggable="false"
+            width="300"
+            height="300"
+            className="preview-image"
           />
-          {debounced && (
-            <div className="preview-image-container">
-              <img
-                src={debounced}
-                alt="preview"
-                draggable="false"
-                width="400"
-                height="400"
-                className="preview-image"
-              />
-            </div>
-          )}
-          {/* @ts-ignore */}
-          <MainButton type="submit" style={{ width: "100%" }}>
-            Upload!
-          </MainButton>
-        </div>
+        )}
+        {/* @ts-ignore */}
+        <MainButton type="submit" style={{ width: "30rem" }}>
+          Upload!
+        </MainButton>
       </form>
     </dialog>
   );

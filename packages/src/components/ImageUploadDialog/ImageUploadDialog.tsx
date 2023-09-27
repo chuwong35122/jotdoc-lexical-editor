@@ -5,9 +5,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import "./ImageUploadDialog.css";
+// import "./ImageUploadDialog.css";
 import { MainButton } from "../Buttons";
 import useDebounce from "../../hook/useDebounce";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { INSERT_IMAGE_COMMAND } from "../../plugins/ImagePlugin";
 
 interface ImageUploadDialogProps {
   isOpen: boolean;
@@ -16,7 +18,7 @@ interface ImageUploadDialogProps {
 
 function ImageUploadDialog(props: ImageUploadDialogProps) {
   const { isOpen, setIsOpen } = props;
-
+  const [editor] = useLexicalComposerContext()
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const [url, setUrl] = useState("");
@@ -31,6 +33,19 @@ function ImageUploadDialog(props: ImageUploadDialogProps) {
   }, [isOpen]);
 
   function handleSubmit() {
+    const payload = {
+      altText: 'This is an ALT',
+      caption: undefined,
+      height: undefined,
+      key: undefined,
+      maxWidth: 800,
+      showCaption: undefined,
+      src: debounced,
+      width: 800,
+      captionEnabled: true,
+    };
+
+    editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
     onClose();
   }
 

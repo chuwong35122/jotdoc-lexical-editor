@@ -1,0 +1,36 @@
+.font-family-selector-container {
+  width: 10rem;
+  max-width: 10rem;
+}
+
+.font-family-select-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.25rem 0 0.25rem;
+  border-radius: 0.25rem;
+  width: 10rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.2 ease-in-out;
+  background-color: white;
+}
+
+.font-family-select-button-container:hover {
+  background-color: #e0e0e0;
+}
+
+.font-family-select-option {
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2 ease-in-out;
+  border: 0;
+  width: 10rem;
+  max-width: 10rem;
+}
+
+.font-family-select-option:hover {
+  background-color: #e0e0e0;
+}
